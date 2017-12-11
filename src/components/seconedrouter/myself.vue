@@ -56,17 +56,17 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem 1rem 0 1rem;
+    padding: 0.8rem 1rem 0 0.8rem;
   }
 
   .myself-bar .span1{
     color: #4887d0;
     font-family: "Microsoft YaHeikaiti";
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 600;
   }
   .myself-bar .span2{
-    font-size: 0.3rem;
+    font-size: 0.7rem;
   }
 
 </style>

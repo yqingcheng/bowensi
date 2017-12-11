@@ -11,7 +11,7 @@
           地区
         <Icon type="arrow-down-b"></Icon>
       </a>
-      <Dropdown-menu slot="list" >
+      <Dropdown-menu slot="list"  style="font-size: 18px">
         <Dropdown-item v-for="(item,index) in rows1" :key="item.id" :name="item.areas">{{item.areas}}</Dropdown-item>
 
       </Dropdown-menu>
@@ -43,7 +43,7 @@
           <img :src="user.img" alt="">
         </div>
         <div class="area-sch-div">
-          <p><b>{{user.school}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></p>
+          <p><b>{{user.school}}</b></p>
           <p>{{user.mark}}</p>
         </div>
         <div class="xiangqing">
@@ -165,9 +165,13 @@
   .selectc{
     width: 33.3%;
     text-align: center;
-    font-size: 1.1rem;
+    font-size: 0.8rem;
     padding: 0.8rem 0;
     float: left;
+
+  }
+  .ivu-dropdown-item{
+    font-size: 0.8rem!important;
   }
   .selectc a{
     color: black;
@@ -175,25 +179,28 @@
   .selectc a:hover{
     color: red;
   }
+  .opactions{
+    font-size: 1rem;
+  }
   .area-sch{
     display: flex;
-    padding: 1rem 1rem 1rem 0;
+    padding: 1rem 0.8rem 1rem 0.8rem;
     justify-content: space-around;
     align-items: center;
     border-bottom: 1px solid #ddd;
   }
 
   .area-sch img{
-    width: 5.1rem;
-    height: 5.1rem;
+    width: 4.5rem;
+    height: 4.5rem;
   }
   .area-sch div{
-    flex: 1;
+    flex: 1 0 auto;
     text-align: center;
   }
   .area-sch-div p{
-    line-height: 1.6rem;
-    font-size: 1.03rem;
+    line-height: 1.4rem;
+    font-size: 0.8rem;
 
   }
   .area-sch-div p:nth-child(2){
@@ -207,7 +214,7 @@
     color: white;
     border-radius: 0.2rem;
     display: inline-block;
-    padding: 0.5rem 1.3rem;
-    font-size: 1rem;
+    padding: 0.3rem 1.1rem;
+    font-size: 0.9rem;
   }
 </style>

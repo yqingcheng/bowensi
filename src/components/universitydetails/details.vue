@@ -104,9 +104,9 @@
 
   .school-name{
     background: #eee;
-    padding: 1.5rem 1rem;
+    padding: 1.2rem 0.8rem;
     width: 100%;
-    height: 6.2rem;
+    height: 5.3rem;
     box-sizing: border-box;
     position: relative;
     display: flex;
@@ -115,64 +115,65 @@
   .school-name span:nth-child(1){
     flex: 1 0 100%;
     /*line-height: 2rem;*/
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 800;
   }
   .school-name span:nth-child(2){
     flex: 1 0 100%;
     color: #888;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
   }
 
   .wap-selet{
-    padding: 1.3rem 0 1.3rem 1rem;
+    padding: 1rem 0 1.2rem 0.8rem;
     display: flex;
     align-items: center;
     /*box-sizing: border-box;*/
   }
   .wap-selet img{
-    width: 8rem;
-
+    width: 7rem;
     float: left;
-    margin-right: 1rem;
+    margin-right: 0.8rem;
   }
   .wap-selet span{
     color: #888;
-    font-size: 0.7rem;
-    margin-right: 1rem;
+    font-size: 0.8rem;
+    margin-right: 0.6rem;
     float: left;
-    line-height: 1.5rem;
+    line-height: 1.3rem;
+
   }
   .wap-selet div{
     width: 60%;
   }
   .content{
-    padding: 0 1rem 1rem 1rem;
+    padding: 0 0.8rem 1rem 0.8rem;
+    font-size: 0.8rem;
   }
   h2{
     text-align: center;
-    line-height: 3.9rem;
-    font-size: 1.4rem;
+    line-height: 3.7rem;
+    font-size: 1.2rem;
   }
   input,textarea{
     width: 90%;
     background: #eee;
     border: none;
     outline: none;
-    padding: 0.7rem 1rem;
+    padding: 0.6rem 1rem;
     display: block;
-    margin: 0 auto 1.2rem ;
-    font-size: 1rem;
+    margin: 0 auto 1.1rem ;
+    font-size: 0.8rem;
   }
   textarea{
-    height: 11.7rem;
+    height: 9.5rem;
   }
   .baoming{
     text-align: center;
     background: #c43c3c;
     width: 90%;
-    font-size: 1rem;
-    line-height: 2rem;
+    font-size: 0.8rem;
+    line-height: 1.8rem;
     color: white;
     display: block;
     margin: -0.7rem auto 1.3rem;

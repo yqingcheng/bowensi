@@ -30,7 +30,7 @@
     <bar></bar>
     <div class="myself">
       <div class="myself-bar">
-        <span class="span1">自考</span>
+        <span class="span1">推荐阅读</span>
         <span class="span2" >更多&nbsp;>>></span>
       </div>
       <zhuanti
@@ -92,30 +92,29 @@
 </script>
 <style scoped>
   .title-h{
-    padding: 1rem;
+    padding: 0.8rem;
   }
   .title-h h2{
     color: black;
-    font-size: 1.4rem;
-
-    line-height: 2.6rem;
+    font-size: 1.1rem;
+    line-height: 2.3rem;
   }
   .title-p span{
-    line-height: 2.9rem;
+    line-height: 2rem;
     margin-right: 1.5rem;
-    font-size: 1rem;
+    font-size: 0.8rem;
     color: #888;
   }
   .text-p{
     padding: 0.5rem 0 0 0 ;
     color: #161415;
-    font-size: 0.94rem;
+    font-size: 0.8rem;
   }
   .myself-bar{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem 1rem 0 1rem;
+    padding: 0.8rem 1rem 0 0.8rem;
   }
 
   .myself-bar .span1{
@@ -125,7 +124,7 @@
     font-weight: 600;
   }
   .myself-bar .span2{
-    font-size: 0.3rem;
+    font-size: 0.8rem;
   }
 
 </style>

@@ -101,6 +101,6 @@
     font-weight: 600;
   }
   .myself-bar .span2{
-    font-size: 0.3rem;
+    font-size: 0.8rem;
   }
 </style>

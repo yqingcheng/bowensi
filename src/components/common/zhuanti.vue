@@ -44,24 +44,29 @@
 <style scoped>
   .xinde{
     display: flex;
-    padding: 1rem 1rem 0.92rem 1rem;
+    padding: 0.8rem 1rem 0.92rem 0.8rem;
     border-bottom: 1px solid #ccc;
     align-items: center;
     justify-content: space-between;
 
   }
   .texxx{
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     padding: 0 0.5rem 0 0;
 
   }
   .xinde .ss{
-    flex: 0 1 15rem;
+    flex: 0 1 12rem;
+    /*width: 10rem;*/
+
+  }
+  .xinde .ss p:first-child{
+    line-height: 1rem;
   }
   .xinde img{
 
-    width: 7.7rem;
-    height: 4.2rem;
+    width: 6.5rem;
+    height: 3.8rem;
     display: block;
   }
 
@@ -73,12 +78,12 @@
   .xinde .xinde-fn span{
     display: inline-block;
     margin-top: 1rem;
-    line-height: 1.4rem;
+    line-height: 1rem;
     float: left;
   }
   .xinde .xinde-fn span:nth-child(2){
     color: #cccccc;
-    font-size: 0.5rem;
+    font-size: 0.7rem;
     float: right;
     margin-right: 1rem;
   }

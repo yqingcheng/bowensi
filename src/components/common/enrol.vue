@@ -34,14 +34,14 @@
 </script>
 <style scoped>
   .enroi{
-    padding: 0.8rem 1rem 1.6rem 1rem;
+    padding: 0.8rem 0.8rem 1.6rem 0.8rem;
 
   }
   .enroi p{
     font-family: "Microsoft YaHeikaiti";
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 600;
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.1rem;
   }
   .enroi-guide{
     display: flex;
@@ -49,7 +49,7 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    font-size: 0.8rem;
+    font-size: 0.6rem;
 
   }
   .enroi-guide li{
@@ -57,9 +57,9 @@
     text-align: center;
     border-radius: 1rem;
     border: 1px solid #ccc;
-    height: 1.4rem;
-    line-height: 1.4rem;
-    margin-top: 0.8rem;
+    height: 1.3rem;
+    line-height: 1.3rem;
+    margin-top: 0.7rem;
     color: #888;
   }
   .enroi-guide li:hover{

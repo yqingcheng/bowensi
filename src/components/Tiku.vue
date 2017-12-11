@@ -107,29 +107,32 @@
 
     border: 1px solid #ddd;
     color: #aaa;
-    margin: 1.3rem auto;
+    margin: 1.1rem auto;
     display: block;
     padding:0.2rem  5rem ;
     outline: none;
-
+    font-size: 0.8rem;
+  }
+  option{
+    text-align: center;
   }
   .down-list{
     padding: 0 1rem;
-    font-size:0.95rem;
+    font-size:0.6rem;
   }
   .down-list li{
     border-bottom: 1px solid #eee;
-    padding: 0 0 1rem 0;
+    padding: 0 0 0.9rem 0;
     margin-bottom: 1rem;
     line-height: 1.2rem;
   }
   .down-list li .spoan1{
     color: #ddd;
-    font-size: 0.5rem;
+    font-size: 0.7rem;
   }
   .down-list li .spoan2{
     color: white;
-    font-size: 0.5rem;
+    font-size: 0.7rem;
     background: cornflowerblue;
     padding: 0.1rem 0.3rem;
     position: absolute;

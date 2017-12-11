@@ -31,9 +31,9 @@
 <style scoped>
   .search{
     width: 100%;
-    height:4.53rem;
+    height:3.9rem;
     background:rgb(241,241,241) ;
-    padding: 0.8rem;
+    padding: 0.7rem;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -51,10 +51,10 @@
     outline: none;
     flex: 1 0 auto;
     padding-left: 1rem;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
   }
   .search div img{
-    height: 1.3rem;
+    height: 1.1rem;
     margin-right: 1rem;
     margin-left: 0.5rem;
   }

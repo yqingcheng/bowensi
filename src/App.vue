@@ -15,7 +15,7 @@ export default {
     margin: 0;
     padding: 0;
   }
-#app {
-
+*{
+  font-size: 110%;
 }
 </style>

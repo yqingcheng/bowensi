@@ -37,7 +37,7 @@
   .wrap-top{
     background: rgb(51,123,205);
     width: 100%;
-    height: 3.3rem;
+    height: 2.8rem;
     display: flex;
     align-items: center;
     color: white;
@@ -53,11 +53,11 @@
     right: 2rem;
   }
   .wrap-top span img{
-    height: 2rem;
+    height: 1.3rem;
     display: block;
   }
   .wrap-top span:nth-child(2){
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     margin: auto;
   }
 </style>

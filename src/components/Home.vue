@@ -233,7 +233,7 @@
 <style scoped>
   .gonggao{
     width: 100%;
-    height: 4rem;
+    height: 3.5rem;
     background-image: url("../../static/images/notice.jpg");
     background-size: percentage(50%,50%);
     background-repeat: no-repeat;
@@ -242,68 +242,67 @@
   .notic-list li{
     border: 1px solid #f1f1f1;
     font-family: "Microsoft YaHeikaiti";
-    font-size: 1rem;
-    padding: 1rem ;
-    line-height: 1.3rem;
+    font-size: 0.8rem;
+    padding: 0.7rem ;
+    line-height: 1.2rem;
   }
   .notic-list li span{
-    color: #cccccc;
-    font-size: 0.5rem;
+    color: #bbb;
+    font-size: 0.8rem;
   }
   .academy .academy-bar{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem;
+    padding: 0.8rem;
   }
   .academy div .span1{
     color: #4887d0;
     font-family: "Microsoft YaHeikaiti";
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 600;
   }
   .academy div .span2{
-    font-size: 0.3rem;
+    font-size: 0.7rem;
   }
 
   .academy ul li{
     border-right: 1px solid #ddd;
     border-top: 1px solid #ddd;
     border-collapse: collapse;
-    height: 8.7rem;
+    height: 7rem;
     width: 25%;
     float: left;
     box-sizing: border-box;
     text-align: center;
-    padding: 1.2rem 0 0 0;
+    padding: 1rem 0 0 0;
 
   }
   .academy ul li p{
-    line-height: 3rem;
-    font-size: 0.9rem;
+    line-height: 1rem;
+    font-size: 0.8rem;
   }
   .academy ul li img{
-    height: 4.2rem;
-    width: 4.2rem;
+    height: 3.4rem;
+    width: 3.4rem;
   }
   .swiper-pagination{
     position: relative;
     bottom: 0;
     background: #eee;
-    height: 1.7rem;
+    height: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
   }
   .myself-sc{
     display: flex;
-    width: 100%;height: 3.6rem;
+    width: 100%;
     align-items: center;
-    font-size: 1.2rem;
+    font-size: 0.8rem;
     box-sizing: border-box;
     font-weight: 600;
-    padding: 0 1rem;
-    margin-top: 0.5rem;
+    padding: 0 0.8rem;
   }
   .myself-sc li{
     flex: 1;
@@ -314,16 +313,17 @@
     text-decoration: none;
   }
   .myself-sc li p{
-    height: 3.6rem;display: block;
-    line-height: 3.6rem;
+    height: 3rem;display: block;
+    line-height: 3.3rem;
   }
-  .academy-wrap{
-    width:100%;
-    height:18.6rem;
-  }
+  /*.academy-wrap{*/
+    /*width:100%;*/
+    /*height:18.6rem;*/
+    /*border: 1px solid red;*/
+  /*}*/
   .swiper-slide img{ width:100%;height: 12.6rem}
   .router-link-active p{
     color: #73a1db;
-    border-bottom: 1px solid red;
+    border-bottom: 2px solid red;
   }
 </style>

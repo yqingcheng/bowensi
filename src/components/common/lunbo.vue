@@ -58,6 +58,6 @@
   }
 </script>
 <style scoped>
-  .lunbo{ width:100%;height:12.6rem}
-  .swiper-slide img{ width:100%;height: 12.6rem}
+  .lunbo{ width:100%;height:10.4rem}
+  .swiper-slide img{ width:100%;height: 10.4rem}
 </style>

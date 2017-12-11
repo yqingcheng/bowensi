@@ -22,7 +22,7 @@
 <style scoped>
   .bar{
     width: 100%;
-    height: 0.7rem;
+    height: 0.6rem;
     background-color: #f1f1f1;
   }
 </style>

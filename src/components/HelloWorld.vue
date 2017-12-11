@@ -2,7 +2,7 @@
   <div class="hello">
     <div class="wrap">
       <div class="wrap-top">
-        <span @click="backSpace">
+        <span @click="backto">
           <img src="../../static/images/backp.png" alt="">
         </span>
         <span>博文思教育</span>
@@ -43,7 +43,7 @@
             <p>院校</p>
           </router-link>
         </li>
-        <li @click="skip">
+        <li @click="skip" id="sto">
           <p>题库</p>
         </li>
       </ul>
@@ -76,7 +76,7 @@
       skip:function () {
         this.$router.push("/Tiku")
       },
-      backSpace:function () {
+      backto:function () {
         this.$router.back(-1)
       }
     }
@@ -98,7 +98,7 @@
   .wrap-top{
     background: rgb(51,123,205);
     width: 100%;
-    height: 3.3rem;
+    height: 2.8rem;
     display: flex;
     align-items: center;
     color: white;
@@ -109,43 +109,48 @@
     left: 1rem;
   }
   .wrap-top span:first-child img{
-    height: 2rem;
+    height: 1.3rem;
     display: block;
   }
   .wrap-top span:last-child{
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     margin: auto;
   }
   .uls{
-    height: 3.2rem;
     display: flex;
     display: -webkit-flex;
     align-items: center;
     justify-content: space-around;
-    font-size: 1rem;
+    font-size: 0.7rem;
     font-weight: 600;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding: 0 1rem;
     background: white;
+  }
+  #sto{
+    font-size: 0.85rem;
+  }
+
+  .uls a{
+    color: black;
+    text-decoration: none;
+  }
+  .uls p{
+    border-bottom: 1px solid #fff;
   }
   .router-link-active p{
     color: #73a1db;
     border-bottom: 1px solid #73a1db;
   }
-  .uls a{
-    color: black;
-    text-decoration: none;
-  }
   .uls li{
-    box-sizing: border-box;
     height: 100%;
     text-align: center;
-    line-height:3.2rem;
+    line-height:2.5rem;
     color: black;
   }
   .top-wrap{
     width: 100%;
-    height: 6.5rem;
+    height: 5.4rem;
+
   }
 
 </style>

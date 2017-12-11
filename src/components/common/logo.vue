@@ -20,7 +20,7 @@
 <style scoped>
   .logo{
     width: 100%;
-    height: 5.4rem;
+    height: 4.5rem;
     background-image: url("../../../static/images/logo.jpg");
     background-repeat: no-repeat;
     background-position: center;
