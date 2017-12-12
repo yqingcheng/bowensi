@@ -14,6 +14,9 @@ import utv from '@/components/seconedrouter/utv'
 import adult from '@/components/seconedrouter/adult'
 import details from '@/components/universitydetails/details'
 import article from '@/components/articleList/article'
+import special from '@/components/special/special'
+import worklist from '@/components/worklist/worklist'
+
 
 Vue.use(Router);
 
@@ -97,7 +100,18 @@ export default new Router({
       path:'/article',
       name:'article',
       component:article
+    },
+    {
+      path:'/special',
+      name:'special',
+      component:special
+    },
+    {
+      path:'/worklist',
+      name:'worklist',
+      component:worklist
     }
+
 
   ]
 })

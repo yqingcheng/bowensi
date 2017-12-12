@@ -3,12 +3,12 @@
     <div class="wrap">
       <div class="wrap-top">
         <span @click="backto">
-          <img src="../../static/images/backp.png" alt="">
+          <img src="../../static/images/backp.png" alt="" v-show="isshow">
         </span>
         <span>博文思教育</span>
       </div>
-      <ul class="uls">
-        <li>
+      <ul class="uls" @click="homes">
+        <li >
           <router-link to="/Home">
             <p>首页</p>
           </router-link>
@@ -56,6 +56,9 @@
 
 <script>
 
+  import domain from "../domain";
+  import axios from 'axios';
+
   export default {
     name: 'hello',
 //    watch:{
@@ -69,15 +72,39 @@
     },
     data () {
       return {
-
+        isshow:false
       }
     },
+    created(){
+      this.getParamater();
+      axios.get(domain.testUrl+'defult/index.html')
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
+
     methods:{
+      //获取参数
+      getParamater() {
+        console.log(domain.testUrl)
+      },
       skip:function () {
         this.$router.push("/Tiku")
       },
       backto:function () {
         this.$router.back(-1)
+      },
+      homes:function (e) {
+        if(!e){e=window.event}
+        if(e.target.textContent==="首页"){
+          this.isshow=false;
+        }else{
+          this.isshow=true;
+        }
+
       }
     }
   }

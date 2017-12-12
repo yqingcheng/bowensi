@@ -82,7 +82,19 @@
     </ul>
     <div> <router-view></router-view> </div>
     <bar></bar>
-    <footbar></footbar>
+    <div class="footbar">
+      <div class="footbar-img">
+        <p><b>依托互联网数据资源和自然语言处理技术优势</b></p>
+        <img src="../../static/images/logoimg.jpg" alt="" @click="skipWorkList">
+        <span class="mores">
+        <span>2017/05/03</span>
+        <span @click="moress">更多&nbsp;&nbsp;&nbsp;>>></span>
+      </span>
+
+        <div class="bar-v"></div>
+      </div>
+    </div>
+
     <logo></logo>
   </div>
 
@@ -90,7 +102,6 @@
 <script>
   import Search from "./common/Search.vue";
   import Lunbo from "./common/lunbo.vue";
-  import footbar from "./common/footbar.vue";
   import enrol from "./common/enrol.vue";
   import bar from "./common/bar.vue";
   import logo from "./common/logo.vue";
@@ -99,14 +110,11 @@
 
   //加载swipercss文件
   require('swiper/dist/css/swiper.css');
-
-
   export default {
     name: 'home',
     components:{
       Lunbo,
       Search,
-      footbar,
       swiper,swiperSlide,
       enrol,bar,logo
     },
@@ -226,6 +234,18 @@
       },
       more:function () {
         this.$router.push("/yuanxiao");
+      },
+      moress(){
+        this.$router.push('/special')
+      },
+      skipWorkList(){
+        this.$router.push({
+          path:'/worklist',
+//          query:{
+//            titles:"文章列表总览"
+//          }
+        })
+
       }
     }
   }
@@ -325,5 +345,40 @@
   .router-link-active p{
     color: #73a1db;
     border-bottom: 2px solid red;
+  }
+  .footbar-img p{
+    color: #1769c6;
+    margin-bottom: 1rem;
+    font-size: 0.8rem;
+    line-height: 0.9rem;
+  }
+  .footbar-img{
+    padding: 0.8rem 1rem 0 0.8rem;
+  }
+  .footbar-img img{
+    width: 100%;
+    height: 9.3rem;
+  }
+  .mores{
+    color: #cccccc;
+    font-size: 0.7rem;
+    display: flex;
+    justify-content: space-between;
+  }
+  .mores span:last-child{
+    color: black;
+  }
+  .bar-v{
+    width: 100%;
+    height: 0.1rem;
+    background: #f1f1f1;
+    margin-top: 0.7rem;
+  }
+  #mores{
+    font-size: 0.8rem;
+    color: black;
+    position: absolute;
+    right: 1rem;
+
   }
 </style>

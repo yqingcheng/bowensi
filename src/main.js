@@ -7,8 +7,11 @@ import router from './router'
 import VueAwesomeSwiper from "vue-awesome-swiper"
 import iView from 'iview'; // 导入组件库
 import 'iview/dist/styles/iview.css'; // 导入样式
+import axios from 'axios';
+import domain from './domain.js';
+global.domain = domain;
 Vue.use(iView);
-
+Vue.prototype.$http = axios;
 
 Vue.config.productionTip = false;
 Vue.use(VueAwesomeSwiper);

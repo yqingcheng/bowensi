@@ -13,7 +13,7 @@
       :xinde="xinde"></zhuanti>
     </div>
     <bar></bar>
-    <footbar></footbar>
+    <footbar :xinde="xinde"></footbar>
     <logo></logo>
   </div>
 </template>
@@ -33,22 +33,25 @@
       return {
         xinde:[
           {
-            "p":"是哦的减肥威迫我外婆额日哦位人品为排位人品为例",
+            "p":"我是电大的数据",
             "img":"../../../static/images/xinde.jpg",
             "span1":"心得方法",
-            "span2":"2017/05/06"
+            "span2":"2017/05/06",
+            "title":"电大"
           },
           {
             "p":"是哦的减肥威迫我外婆额日哦位人品为排位人品为例",
             "img":"../../../static/images/xinde.jpg",
             "span1":"考生必读",
-            "span2":"2017/05/06"
+            "span2":"2017/05/06",
+            "title":"电大"
           },
           {
             "p":"是哦的减肥威迫我外婆额日哦位人品为排位人品为例",
             "img":"../../../static/images/xinde.jpg",
             "span1":"考生必读",
-            "span2":"2017/05/06"
+            "span2":"2017/05/06",
+            "title":"电大"
           }
         ]
       }

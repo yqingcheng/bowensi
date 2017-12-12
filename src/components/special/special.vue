@@ -1,57 +1,60 @@
 
-<!--------------------------------------网教页面---------------------------------------------->
+<!-------------------------------------------专题列表页面-------------------------------------------->
 
 <template>
-  <div class="wangjiao">
+  <div class="special">
+     <headerbar></headerbar>
     <search></search>
-    <div class="myself">
-      <div class="myself-bar">
-        <span class="span1">网教</span>
-        <span class="span2">更多&nbsp;>>></span>
-      </div>
-      <zhuanti
-      :xinde="xinde"></zhuanti>
-    </div>
-    <bar></bar>
     <footbar :xinde="xinde"></footbar>
+    <bar></bar>
+    <div class="myself-bar">
+      <span class="span1">最新专题</span>
+      <span class="span2">更多&nbsp;>>></span>
+    </div>
+    <zhuanti
+    :xinde="xinde"></zhuanti>
     <logo></logo>
   </div>
 </template>
 <script>
-  import myself from "./seconedrouter/myself.vue";
-  import bar from "./common/bar.vue";
-  import search from "./common/Search.vue";
-  import footbar from "./common/footbar.vue";
-  import logo from "./common/logo.vue";
-  import zhuanti from "./common/zhuanti.vue";
+  import headerbar from "../common/headerbar.vue";
+  import search from "../common/Search.vue";
+  import footbar from "../common/footbar.vue";
+  import bar from "../common/bar.vue";
+  import zhuanti from "../common/zhuanti.vue";
+  import logo from "../common/logo.vue";
+
   export default {
-    name: 'wangjiao',
+    name: 'special',
     components:{
-      search,myself,logo,footbar,bar,zhuanti
+      headerbar,search,footbar,bar,zhuanti,logo
     },
     data () {
       return {
         xinde:[
           {
-            "p":"我是网教的数据",
+            "p":"是哦的减肥威迫我外婆额日哦位人品为排位人品为例",
             "img":"../../../static/images/xinde.jpg",
             "span1":"心得方法",
-            "span2":"2017/05/06",
-            "title":"网教"
+            "span2":"2017/05/06"
           },
           {
             "p":"是哦的减肥威迫我外婆额日哦位人品为排位人品为例",
             "img":"../../../static/images/xinde.jpg",
             "span1":"考生必读",
-            "span2":"2017/05/06",
-            "title":"网教"
+            "span2":"2017/05/06"
           },
           {
             "p":"是哦的减肥威迫我外婆额日哦位人品为排位人品为例",
             "img":"../../../static/images/xinde.jpg",
             "span1":"考生必读",
-            "span2":"2017/05/06",
-            "title":"网教"
+            "span2":"2017/05/06"
+          },
+          {
+            "p":"是哦的减肥威迫我外婆额日哦位人品为排位人品为例",
+            "img":"../../../static/images/xinde.jpg",
+            "span1":"考生必读",
+            "span2":"2017/05/06"
           }
         ]
       }
@@ -62,7 +65,8 @@
     methods:{
       menu() {
         window.scrollTo(0,0);
-      }
+      },
+
     }
   }
 </script>

@@ -168,7 +168,6 @@
     font-size: 0.8rem;
     padding: 0.8rem 0;
     float: left;
-
   }
   .ivu-dropdown-item{
     font-size: 0.8rem!important;
@@ -184,7 +183,7 @@
   }
   .area-sch{
     display: flex;
-    padding: 1rem 0.8rem 1rem 0.8rem;
+    padding: 1rem 0.8rem 0.8rem 0.8rem;
     justify-content: space-around;
     align-items: center;
     border-bottom: 1px solid #ddd;
@@ -205,9 +204,7 @@
   }
   .area-sch-div p:nth-child(2){
     color: #888;
-
   }
-
   .xiangqing span{
     background: #e2364e;
     text-align: center;
