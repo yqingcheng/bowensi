@@ -20,27 +20,29 @@
     },
     data () {
       return {
-        xinde:[
-          {
-            "p":"是哦的减肥威迫我外婆额日哦位人品为排位人品为例",
-            "img":"../../../static/images/xinde.jpg",
-            "span1":"心得方法",
-            "span2":"2017/05/06"
-          },
-          {
-            "p":"是哦的减肥威迫我外婆额日哦位人品为排位人品为例",
-            "img":"../../../static/images/xinde.jpg",
-            "span1":"考生必读",
-            "span2":"2017/05/06"
-          },
-          {
-            "p":"是哦的减肥威迫我外婆额日哦位人品为排位人品为例",
-            "img":"../../../static/images/xinde.jpg",
-            "span1":"考生必读",
-            "span2":"2017/05/06"
-          }
-        ]
+        xinde:[]
       }
+    },
+    created(){
+      let that=this;
+      /*
+      * 热门文章
+      *此接口可用于首页、自考、网教、电大、成考页面 会根据不同的分类ID 返回不同类型的热门文章
+      *参数 category_id "7" 网教
+       id	文章ID
+      title	文章标题
+      created_at	发布时间
+      image	文章图片  若没有图片则自行填补上对应的图片  （可找设计）
+      name	文章小类别
+      *
+      * */
+      this.$http.get('/api/default/hot-article.html',{params: {category_id: 7}})
+        .then(function (response) {
+          that.xinde=response.data.data;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     },
     methods:{
       pageto:function () {

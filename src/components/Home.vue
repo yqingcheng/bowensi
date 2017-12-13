@@ -5,12 +5,15 @@
   <div class="home">
     <search></search>
     <lunbo></lunbo>
-    <div class="gonggao">
-    </div>
-    <ul class="notic-list" v-for="item in notic">
+    <div class="gonggao"></div>
+    <ul class="notic-list" >
       <li>
-        <p>{{item.text}}</p>
-        <span>{{item.data}}</span>
+        <p>{{first.title}}</p>
+        <span>{{first.created_at}}</span>
+      </li>
+      <li v-for="item in other">
+        <p>{{item.title}}</p>
+        <span>{{item.created_at}}</span>
       </li>
     </ul>
     <bar></bar>
@@ -27,25 +30,25 @@
           <!-- slides -->
           <swiper-slide >
             <ul >
-              <li v-for="(item,index) in school" :key="item.id" @click="skipDetalis(index)">
-                <img :src="item.img" alt="">
-                <p > {{item.sc}}</p>
+              <li v-for="(item,index) in schoolfirst" :key="item.id" @click="skipDetalis(index)">
+                <img :src="imgsrc+item.logo" alt="">
+                <p > {{item.name}}</p>
               </li>
             </ul>
           </swiper-slide>
           <swiper-slide >
             <ul >
-              <li v-for="(item,index) in school" :key="item.id" @click="skipDetalis(index)">
-                <img :src="item.img" alt="">
-                <p >{{item.sc}}</p>
+              <li v-for="(item,index) in schooltwo" :key="item.id" @click="skipDetalis(index)">
+                <img :src="imgsrc+item.logo" alt="">
+                <p >{{item.name}}</p>
               </li>
             </ul>
           </swiper-slide>
           <swiper-slide >
             <ul >
-              <li v-for="(item,index) in school" :key="item.id" @click="skipDetalis(index)">
-                <img :src="item.img" alt="">
-                <p >{{item.sc}}</p>
+              <li v-for="(item,index) in schoolthree" :key="item.id" @click="skipDetalis(index)">
+                <img :src="imgsrc+item.logo" alt="">
+                <p >{{item.name}}</p>
               </li>
             </ul>
           </swiper-slide>
@@ -61,22 +64,22 @@
     <ul class="myself-sc">
         <li>
           <router-link to="/myself">
-            <p>自考</p>
+            <p>{{list[0]}}</p>
           </router-link>
         </li>
         <li>
           <router-link to="/network">
-            <p>网教</p>
+            <p>{{list[2]}}</p>
           </router-link>
         </li>
         <li>
           <router-link to="/utv">
-            <p>电大</p>
+            <p>{{list[1]}}</p>
           </router-link>
         </li>
         <li>
           <router-link to="/adult">
-            <p>成考</p>
+            <p>{{list[3]}}</p>
           </router-link>
         </li>
     </ul>
@@ -120,11 +123,7 @@
     },
     data () {
       return {
-        imsg:[
-          {"img":"http://www.hangowa.com/data/upload/mobile/special/s1/s1_05327186142976760.jpg"},
-          {"img":"http://www.hangowa.com/data/upload/mobile/special/s1/s1_05345109604997733.jpg"},
-          {"img":"http://www.hangowa.com/data/upload/mobile/special/s1/s1_05330562712030759.jpg"}
-        ],
+        imgsrc:domain.testUrl,
         swiperOption: {
           //手动滑动之后继续自动轮播
 //          autoplayDisableOnInteraction : false,
@@ -141,78 +140,84 @@
 //            console.log(swiper)
           }
         },
-        notic:[
-          {
-            "text":"国家隐含施蒂利克上岛咖啡抗裂砂浆大富科技框架水电费卫生法律框架我耳机问",
-            "data":"2017/05/03"
-          },
-          {
-            "text":"国家隐含施蒂利克上岛咖啡抗裂砂",
-            "data":"2017/05/03"
-          },
-          {
-            "text":"含施蒂利克上岛咖啡抗裂砂国家隐含施蒂利克上岛咖啡抗裂砂国家隐含施蒂利克上岛咖啡抗裂砂",
-            "data":"2017/05/03"
-          },
-          {
-            "text":"国家隐含施蒂利克上岛咖啡抗裂砂",
-            "data":"2017/06/03"
-          }
-        ],
         propp:[
           {text:"报考指南"},
-          {
-            list:[
-              {"zhinan":"招生简章"},
-              {"zhinan":"热门专业"},
-              {"zhinan":"考试报名"},
-              {"zhinan":"考试时间"},
-              {"zhinan":"证书查询"},
-              {"zhinan":"院校推荐"},
-              {"zhinan":"招生简章"},
-              {"zhinan":"录取分数线"}
-
-            ]
-          }
+          {list:[]}
         ],
-        school:[
-          {
-            "sc":"清华大学",
-            "img":"../../static/images/schoo.jpg"
-          },
-          {
-            "sc":"北京大学",
-            "img":"../../static/images/schoo.jpg"
-          },
-          {
-            "sc":"清华大学",
-            "img":"../../static/images/schoo.jpg"
-          },
-          {
-            "sc":"清华大学",
-            "img":"../../static/images/schoo.jpg"
-          },
-          {
-            "sc":"清华大学",
-            "img":"../../static/images/schoo.jpg"
-          },
-          {
-            "sc":"清华大学",
-            "img":"../../static/images/schoo.jpg"
-          },
-          {
-            "sc":"清华大学",
-            "img":"../../static/images/schoo.jpg"
-          },
-          {
-            "sc":"清华大学",
-            "img":"../../static/images/schoo.jpg"
-          },
-        ]
+        schoolfirst:[],
+        schooltwo:[],
+        schoolthree:[],
+        first:[],
+        other:[],
+        list:[]
       }
     },
     created(){
       this.menu();
+      let that=this;
+      /*
+      * 公告栏
+      *first	公告首位
+      * other	其他公告
+      * id	文章ID
+      * title	文章标题
+      * */
+      this.$http.get('/api/home/notice.html')
+        .then(function (response) {
+          that.first=response.data.data.first;
+          that.other=response.data.data.other;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      /*
+      *报考指南
+      *该关键字可点击可跳转  跳转页面是文章列表
+      * keyword_name	关键字
+      * is_red 是否标红 0：不标 1：标红 （暂时不需要 忽略）
+      * */
+      this.$http.get('/api/default/guide.html')
+        .then(function (response) {
+          that.propp[1].list=response.data.data;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      /*
+      * 文章分类
+      *此接口汉字可用于首页热门文章分类  分类ID不会变 汉字可能会变  需要用到此分类ID的  ID值可写死
+      *id	类别ID
+      * name	类别名称
+      * */
+      this.$http.get('/api/home/category.html')
+        .then(function (response) {
+          response.data.data.forEach((item) => {
+            that.list.push(item.name)
+          });
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      /*
+      *热门院校
+      *该院校列表可点击跳转  跳转页面至 院校详情。
+      *hot	热门院校内容
+      * more	更多院校链接
+      * id	院校ID
+      * name	院校名称
+      * logo	院校LOGO
+      * */
+      this.$http.get('/api/home/school.html')
+        .then(function (response) {
+          that.schoolfirst=response.data.data.hot.slice(0,8);
+          that.schooltwo=response.data.data.hot.slice(8,16);
+          that.schoolthree=response.data.data.hot.slice(16,23);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+
+
     },
     methods:{
       menu() {
@@ -300,7 +305,7 @@
   }
   .academy ul li p{
     line-height: 1rem;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
   .academy ul li img{
     height: 3.4rem;

@@ -10,6 +10,7 @@ import 'iview/dist/styles/iview.css'; // 导入样式
 import axios from 'axios';
 import domain from './domain.js';
 global.domain = domain;
+
 Vue.use(iView);
 Vue.prototype.$http = axios;
 

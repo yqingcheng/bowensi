@@ -7,7 +7,7 @@
       <p>{{propp[0].text}}</p>
       <ul class="enroi-guide" >
         <li v-for="item in propp[1].list">
-          {{item.zhinan}}
+          {{item.keyword_name}}
         </li>
       </ul>
     </div>

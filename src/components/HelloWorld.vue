@@ -10,41 +10,41 @@
       <ul class="uls" @click="homes">
         <li >
           <router-link to="/Home">
-            <p>首页</p>
+            <p>{{items[0]}}</p>
           </router-link>
         </li>
         <li>
           <router-link to="/Zikao">
 
-            <p>自考</p>
+            <p>{{items[2]}}</p>
           </router-link>
         </li>
         <li>
           <router-link to="/Wangjiao">
 
-            <p>网教</p>
+            <p>{{items[4]}}</p>
           </router-link>
         </li>
         <li>
           <router-link to="/Dianda">
 
-            <p>电大</p>
+            <p>{{items[3]}}</p>
           </router-link>
         </li>
         <li>
           <router-link to="/Chengkao">
 
-            <p>成考</p>
+            <p>{{items[5]}}</p>
           </router-link>
         </li>
         <li>
           <router-link to="/Yuanxiao">
 
-            <p>院校</p>
+            <p>{{items[6]}}</p>
           </router-link>
         </li>
         <li @click="skip" id="sto">
-          <p>题库</p>
+          <p>{{items[7]}}</p>
         </li>
       </ul>
     </div>
@@ -56,8 +56,7 @@
 
 <script>
 
-  import domain from "../domain";
-  import axios from 'axios';
+
 
   export default {
     name: 'hello',
@@ -72,14 +71,17 @@
     },
     data () {
       return {
-        isshow:false
+        isshow:false,
+        items:[]
       }
     },
     created(){
-      this.getParamater();
-      axios.get(domain.testUrl+'defult/index.html')
+      let that=this;
+      this.$http.get('/api/default/index.html')
         .then(function (response) {
-          console.log(response);
+          response.data.data.items.forEach((item) => {
+            that.items.push(item.label)
+          })
         })
         .catch(function (error) {
           console.log(error);
@@ -87,10 +89,6 @@
     },
 
     methods:{
-      //获取参数
-      getParamater() {
-        console.log(domain.testUrl)
-      },
       skip:function () {
         this.$router.push("/Tiku")
       },

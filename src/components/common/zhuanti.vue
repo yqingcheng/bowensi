@@ -6,13 +6,13 @@
     <div class="myself-list" @click="JumpDetails">
       <div class="xinde" v-for="item in xinde" >
         <div class="ss">
-          <p class="texxx">{{item.p}}</p>
+          <p class="texxx">{{item.title}}</p>
           <p class="xinde-fn">
-            <span><b>{{item.span1}}</b></span>
-            <span>{{item.span2}}</span>
+            <span><b>{{item.name}}</b></span>
+            <span>{{item.created_at}}</span>
           </p>
         </div>
-        <img :src="item.img" alt="">
+        <img :src="item.image" alt="">
       </div>
     </div>
   </div>

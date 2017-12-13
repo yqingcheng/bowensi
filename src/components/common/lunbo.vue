@@ -5,7 +5,7 @@
   <div class="lunbo">
       <swiper :options="swiperOption" ref="mySwiper">
         <!-- slides -->
-        <swiper-slide v-for="item in imsg" :key="item.id"><img :src="item.img" alt=""></swiper-slide>
+        <swiper-slide v-for="item in imsg" :key="item.id"><img :src="imgsrc+item.image" alt=""></swiper-slide>
         <!-- Optional controls -->
         <div class="swiper-pagination"  slot="pagination"></div>
       </swiper>
@@ -15,6 +15,7 @@
 <script>
   import {swiper, swiperSlide} from 'vue-awesome-swiper'
   import VueAwesomeSwiper from 'vue-awesome-swiper'
+
   require('swiper/dist/css/swiper.css');
 
   export default {
@@ -25,11 +26,8 @@
     },
     data () {
       return {
-        imsg:[
-          {"img":"http://www.hangowa.com/data/upload/mobile/special/s1/s1_05327186142976760.jpg"},
-          {"img":"http://www.hangowa.com/data/upload/mobile/special/s1/s1_05345109604997733.jpg"},
-          {"img":"http://www.hangowa.com/data/upload/mobile/special/s1/s1_05330562712030759.jpg"}
-        ],
+        imgsrc:domain.testUrl,
+        imsg:[],
         swiperOption: {
           //手动滑动之后继续自动轮播
           autoplayDisableOnInteraction : false,
@@ -51,6 +49,22 @@
     },
     computed: {
 
+    },
+    created(){
+      let that=this;
+      this.$http.get('/api/home/figure.html')
+        .then(function (response) {
+
+          that.imsg=response.data.data;
+
+//          response.data.data.items.forEach((item) => {
+//            console.log(item.label);
+//            that.items.push(item.label)
+//          })
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     },
     mounted () {
 
