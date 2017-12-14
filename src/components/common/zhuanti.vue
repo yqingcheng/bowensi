@@ -3,8 +3,8 @@
 
 <template>
   <div class="zhuanti">
-    <div class="myself-list" @click="JumpDetails">
-      <div class="xinde" v-for="item in xinde" >
+    <div class="myself-list" >
+      <div class="xinde" v-for="(item,index) in xinde":key="item.id" @click="JumpDetails(index)">
         <div class="ss">
           <p class="texxx">{{item.title}}</p>
           <p class="xinde-fn">
@@ -35,10 +35,17 @@
       }
     },
     methods:{
-      JumpDetails(){
-        this.$router.push("/article");
+      JumpDetails(index){
+        this.$router.push({
+          path:'/article',
+          query:{
+            ids:this.xinde[index].id
+          }
+        }
+        );
       },
     }
+
   }
 </script>
 <style scoped>

@@ -17,7 +17,7 @@
   export default {
     name: 'footbar',
     props: {
-      xinde: {
+      titles: {
         type: Array,
         required: true
       }
@@ -32,14 +32,13 @@
     },
     methods:{
       skipto(){
-        console.log(this.xinde);
         this.$router.push({
           path:'/worklist',
           query:{
-            titles:this.xinde[0].title,
-            xindes:this.xinde
+            titles:this.titles[0].titles
           }
         })
+
       }
     }
   }

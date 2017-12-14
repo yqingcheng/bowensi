@@ -3,23 +3,25 @@
 
 <template>
   <div class="tiku">
-
     <headerbar></headerbar>
     <select v-model="selected" ref="onsss" @change="selectedd">
-      <option>题库</option>
-      <option>自考</option>
-      <option>网教</option>
-      <option>电大</option>
-      <option>成考</option>
+      <option>题库列表</option>
+      <option v-for="item in fenlei">{{keywords1}}</option>
     </select>
-    <ul class="down-list">
-      <li v-for="item in filterName">
-        <p><b>{{item.p}}</b></p>
-        <span class="spoan1">{{item.time}}</span>
-        <span class="spoan2">{{item.directroy}}</span>
+    <ul class="down-list" v-show="isshow1">
+      <li v-for="item in list1">
+        <p><b>{{item.title}}</b></p>
+        <span class="spoan1">{{item.created_at}}</span>
+        <span class="spoan2">{{keywords1}}</span>
       </li>
     </ul>
-
+    <ul class="down-list" v-show="isshow2">
+      <li v-for="item in list2">
+        <p><b>{{item.title}}</b></p>
+        <span class="spoan1">{{item.created_at}}</span>
+        <span class="spoan2">{{keywords2}}</span>
+      </li>
+    </ul>
   </div>
 </template>
 <script>
@@ -32,58 +34,80 @@
     data () {
       return {
         zikao:true,
-        canshu:"题库",
-        selected:"题库",
-        list:[
-          {
-            "p":"多家银行水电费监考老师多家菲利克斯叫对方立刻科技四路看到房价我偶尔忘记发了空间十分",
-            "time":"2017/05/03",
-            "directroy":"网教"
-          },
-          {
-            "p":"多斯叫对方立刻科技四路价我偶尔忘记发了空间十分",
-            "time":"2017/05/03",
-            "directroy":"电大"
-          },
-          {
-            "p":"多家银行水电费电费监考老电费监考老电费监考老电费监考老监考老房价我偶尔忘记发了空间十分",
-            "time":"2017/05/03",
-            "directroy":"成考"
-          },
-          {
-            "p":"多家银行水电费监考老偶尔忘记发了空间十分",
-            "time":"2017/05/03",
-            "directroy":"自考"
-          },
-          {
-            "p":"多家方立刻科技四路偶尔忘记发了空间十分",
-            "time":"2017/05/03",
-            "directroy":"自考"
-          }
-        ]
+        fenlei:[],
+        selected:"题库列表",
+        keywords1:'',
+        keywords2:'',
+        list1:[],
+        list2:[],
+        isshow1:true,
+        isshow2:true
       }
     },
-    mounted(){
+    created(){
+      this.menu();
 
-    },
-    computed:{
-      /*
-      过滤器
-      过滤list列表 返回 与参数 canshu相匹配的 列表
-      */
-      filterName:function () {
-        let that=this;
-        return that.list.filter(function (user) {
-          if(that.canshu==="题库"){
-            return user;
-          }else{
-            return user.directroy.indexOf(that.canshu)!==-1
-          }
+      let that=this;
+//      /*
+//      * 题库列表
+//      *此接口可用于首页、自考、网教、电大、成考页面 会根据不同的分类ID 返回不同类型的热门文章
+//      *参数 category_id
+//      page	分页信息
+//      pageParam	获取下一页的的参数 e.g.  xxx/xxx.html?page=2
+//      totalCount	一共数据量
+//      defaultPageSize	一页数据量
+//      data	数据
+//      data > title	题库页面title
+//      keywords	题库页面keywords
+//      description	题库页面description
+//      list	数据列表
+//      list > title	文章标题
+//      created_at	文章发布时间
+//      *
+//      * */
+      this.$http.get('/api/tiku/list.html',{params: {category_id: 182}})
+        .then(function (response) {
+          that.list1=response.data.data.data.list;
+          that.keywords1=response.data.data.data.keywords
         })
-      }
+        .catch(function (error) {
+          console.log(error)
+        });
+      this.$http.get('/api/tiku/list.html',{params: {category_id: 181}})
+        .then(function (response) {
+          that.list2=response.data.data.data.list;
+          that.keywords2=response.data.data.data.keywords
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
+      this.$http.get('/api/tiku/index.html')
+        .then(function (response) {
+          console.log(response.data.data)
+          that.fenlei=response.data.data
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
     },
-    methods:{
+//    computed:{
+//      /*
+//      过滤器
+//      过滤list列表 返回 与参数 canshu相匹配的 列表
+//      */
+//      filterName:function () {
+//        let that=this;
+//        return that.list.filter(function (user) {
+//          if(that.canshu==="题库"){
+//            return user;
+//          }else{
+//            return user.directroy.indexOf(that.canshu)!==-1
+//          }
+//        })
+//      }
+//    },
 
+    methods:{
       backto:function () {
         this.$router.push("/home");
       },
@@ -91,13 +115,19 @@
         window.scrollTo(0,0);
       },
       selectedd() {
-        this.canshu=this.selected;
-        console.log(this.canshu);
+        if(this.selected===this.keywords1){
+          this.isshow2=false;
+          this.isshow1=true
+        }else if(this.selected===this.keywords2){
+          this.isshow2=true;
+          this.isshow1=false
+        }else if(this.selected==='题库列表'){
+          this.isshow2=true;
+          this.isshow1=true
+        }
+
       }
     },
-    created(){
-      this.menu();
-    }
 
   }
 </script>
@@ -127,7 +157,7 @@
     line-height: 1.2rem;
   }
   .down-list li .spoan1{
-    color: #ddd;
+    color: #aaa;
     font-size: 0.7rem;
   }
   .down-list li .spoan2{

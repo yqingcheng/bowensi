@@ -5,24 +5,18 @@
   <div class="details">
     <headerbar></headerbar>
     <div class="school-name">
-      <span>{{schoole}}</span>
-      <span>985高校</span>
+      <span>{{name}}</span>
+      <span>{{label}}</span>
     </div>
     <div class="wap-selet">
-      <img :src="img" alt="">
+      <img :src="imgsrc+logo" alt="">
       <div>
-        <span>所在地：北京市</span>
-        <span>隶属于：教育部</span>
-        <span>国家重点学科：81个</span>
-        <span>硕士点：244个</span>
-        <span>院士：59个</span>
-        <span>博士点：201个</span>
-        <span>类型：综合</span>
+        {{description}}
       </div>
 
     </div>
-    <div class="content">
-      详情
+    <div class="content" v-html="detail">
+
     </div>
     <bar></bar>
     <enrol
@@ -52,7 +46,7 @@
       return {
         schoole:"",
         img:"",
-
+        imgsrc:domain.testUrl,
         propp:[
           {text:"主要专业"},
           {
@@ -72,17 +66,31 @@
             ]
           }
         ],
-
+        name:'',
+        logo:'',
+        description:'',
+        label:'',
+        detail:''
       }
     },
     created(){
       this.menu();
+      this.id=this.$route.query.id;
+      let that=this;
+      this.$http.get('/api/item/school-item.html',{params: {id: this.id}})
+        .then(response => {
+//          console.log(response.data.data.content);
+          that.name=response.data.data.content.name;
+          that.logo=response.data.data.content.logo;
+          that.description=response.data.data.content.description;
+          that.label=response.data.data.content.label;
+          that.detail=response.data.data.content.detail;
+        })
+
     },
 
     mounted(){
-//      接收院校信息
-      this.schoole=this.$route.query.schoole;
-      this.img=this.$route.query.img;
+
     },
     methods:{
       menu() {
@@ -91,7 +99,13 @@
 //      立即报名函数
       ImmediatelySignUp(){
         console.log("姓名："+this.$refs.name.value,"电话："+this.$refs.phone.value,
-                    "text:"+this.$refs.text.value)
+                    "text:"+this.$refs.text.value);
+        this.$http.post('/api/school/message.html',
+          {params: {name: this.$refs.name.value}})
+          .then(response => {
+//            console.log(response.data.data.msg)
+            alert(response.data.data.msg)
+          })
       },
 //      立即查询函数
       ImmediateConsultation(){
@@ -125,26 +139,21 @@
   }
 
   .wap-selet{
-    padding: 1rem 0 1.2rem 0.8rem;
-    display: flex;
-    align-items: center;
-    /*box-sizing: border-box;*/
+    padding: 1rem 0.8rem 1.2rem 0.8rem;
+    /*display: flex;*/
+    /*align-items: center;*/
   }
   .wap-selet img{
     width: 7rem;
     float: left;
     margin-right: 0.8rem;
   }
-  .wap-selet span{
+
+  .wap-selet div{
+    width: 100%;
     color: #888;
     font-size: 0.8rem;
-    margin-right: 0.6rem;
-    float: left;
     line-height: 1.3rem;
-
-  }
-  .wap-selet div{
-    width: 60%;
   }
   .content{
     padding: 0 0.8rem 1rem 0.8rem;

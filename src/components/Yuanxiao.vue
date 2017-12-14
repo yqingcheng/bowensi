@@ -5,14 +5,13 @@
   <div class="yuanxiao">
     <search></search>
     <!--iview下拉菜单-->
-
     <Dropdown trigger="click" class="selectc" @on-click="changes">
       <a href="javascript:void(0)" >
           地区
         <Icon type="arrow-down-b"></Icon>
       </a>
       <Dropdown-menu slot="list"  style="font-size: 18px">
-        <Dropdown-item v-for="(item,index) in rows1" :key="item.id" :name="item.areas">{{item.areas}}</Dropdown-item>
+        <Dropdown-item v-for="(item,index) in rows1" :key="item.id" :name="item.name">{{item.name}}</Dropdown-item>
 
       </Dropdown-menu>
       </Dropdown>
@@ -22,29 +21,19 @@
         <Icon type="arrow-down-b"></Icon>
       </a>
       <Dropdown-menu slot="list">
-        <Dropdown-item v-for="(item,index) in rows2" :key="item.id" :name="item.major">{{item.major}}</Dropdown-item>
-
-      </Dropdown-menu>
-    </Dropdown>
-    <Dropdown trigger="click" class="selectc" @on-click="changes">
-      <a href="javascript:void(0)">
-        分数
-        <Icon type="arrow-down-b"></Icon>
-      </a>
-      <Dropdown-menu slot="list">
-        <Dropdown-item v-for="(item,index) in rows3" :key="item.id" :name="item.num">{{item.num}}</Dropdown-item>
+        <Dropdown-item v-for="(item,index) in rows2" :key="item.id" :name="item.name">{{item.name}}</Dropdown-item>
 
       </Dropdown-menu>
     </Dropdown>
    <!--学院列表-->
     <div class="wrapcase">
-      <div class="area-sch" v-for="(user,index) in filterName" :key="user.id">
+      <div class="area-sch" v-for="(user,index) in users" :key="user.id">
         <div>
-          <img :src="user.img" alt="">
+          <img :src="imgsrc+user.logo" alt="">
         </div>
         <div class="area-sch-div">
-          <p><b>{{user.school}}</b></p>
-          <p>{{user.mark}}</p>
+          <p><b>{{user.name}}</b></p>
+          <p>本科线：{{user.fraction}}分</p>
         </div>
         <div class="xiangqing">
           <span @click="skipDetalis(index)">院校详情</span>
@@ -58,7 +47,6 @@
 </template>
 <script>
   import search from "./common/Search.vue";
-//  import logo from "./common/logo.vue";
   export default {
     name: 'yuanxiao',
     components:{
@@ -67,74 +55,55 @@
 
     data () {
       return {
+        imgsrc:domain.testUrl,
         canshu:"",
-        area:[
-          {
-            "img":"../../../static/images/schoo.jpg",
-            "school":"逗比大学",
-            "mark":"本科线：88分"
-          },
-          {
-            "img":"../../../static/images/schoo.jpg",
-            "school":"清华大学",
-            "mark":"本科线：99分"
-          },{
-            "img":"../../../static/images/schoo.jpg",
-            "school":"清华大学",
-            "mark":"本科线：99分"
-          },{
-            "img":"../../../static/images/schoo.jpg",
-            "school":"清华大学",
-            "mark":"本科线：388分"
-          },{
-            "img":"../../../static/images/schoo.jpg",
-            "school":"清华大学",
-            "mark":"本科线：388分"
-          },{
-            "img":"../../../static/images/schoo.jpg",
-            "school":"清华大学",
-            "mark":"本科线：99分"
-          },{
-            "img":"../../../static/images/schoo.jpg",
-            "school":"清华大学",
-            "mark":"本科线：99分"
-          },{
-            "img":"../../../static/images/schoo.jpg",
-            "school":"清华大学",
-            "mark":"本科线：99分"
-          },{
-            "img":"../../../static/images/schoo.jpg",
-            "school":"清华大学",
-            "mark":"本科线：99分"
-          }
-        ],
+        users:[],
         rows1:[
-          {"areas":"北京"},{"areas":"上海"},{"areas":"广州"},{"areas":"深圳"},{"areas":"台湾"}
+
         ],
         rows2:[
-          {"major":"英语"},{"major":"语文"},{"major":"数学"},{"major":"物理"},{"major":"化学"}
-        ],
-        rows3:[
-          {"num":"88"},{"num":"99"},{"num":"388"},{"num":"288"},{"num":"188"}
-        ],
+
+        ]
       }
     },
     created(){
 //      此时执行函数menu（）
       this.menu();
-    },
-    computed:{
+      let that=this;
       /*
-      过滤器
-      过滤area列表 返回 与参数 canshu相匹配的 列表
-      */
-      filterName:function () {
-        let self=this;
-        return self.area.filter(function (user) {
-          return user.school.indexOf(self.canshu)!==-1 || user.mark.indexOf(self.canshu)!==-1
-        })
-      }
+      *院校列表检索
+      * */
+      this.$http.post('/api/school/index.html').then(response => {
+        that.users=response.data.data.data.content;
+        console.log(response.data.data.data.content)
+      });
+      /*
+      * 城市列表
+      * */
+      this.$http.get('/api/school/city.html').then(response => {
+//        console.log(response.data.data);
+        that.rows1=response.data.data;
+      });
+      /*
+      * 专业名称
+      * */
+      this.$http.post('/api/school/major.html').then(response => {
+
+        that.rows2=response.data.data;
+      });
     },
+//    computed:{
+//      /*
+//      过滤器
+//      过滤area列表 返回 与参数 canshu相匹配的 列表
+//      */
+//      filterName:function () {
+//        let self=this;
+//        return self.area.filter(function (user) {
+//          return user.school.indexOf(self.canshu)!==-1 || user.mark.indexOf(self.canshu)!==-1
+//        })
+//      }
+//    },
     methods:{
 //      函数menu window 保持顶端展示
       menu() {
@@ -146,11 +115,11 @@
       用query传递参数
       */
       skipDetalis:function(index){
+//        console.log(this.users[index].id)
         this.$router.push({
           path:'universitydetails/details',
           query:{
-            schoole:this.area[index].school,
-            img:this.area[index].img,
+            id:this.users[index].id
           }
         })
       },
@@ -163,7 +132,7 @@
 </script>
 <style scoped>
   .selectc{
-    width: 33.3%;
+    width: 50%;
     text-align: center;
     font-size: 0.8rem;
     padding: 0.8rem 0;
@@ -184,7 +153,7 @@
   .area-sch{
     display: flex;
     padding: 1rem 0.8rem 0.8rem 0.8rem;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #ddd;
   }
@@ -194,7 +163,6 @@
     height: 4.5rem;
   }
   .area-sch div{
-    flex: 1 0 auto;
     text-align: center;
   }
   .area-sch-div p{

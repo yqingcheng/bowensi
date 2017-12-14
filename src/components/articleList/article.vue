@@ -5,26 +5,14 @@
   <div class="article">
     <headerbar></headerbar>
     <div class="title-h">
-      <h2><b>90后是垮掉的一代？别扯淡了！</b></h2>
+      <h2><b>{{title}}</b></h2>
       <h2>（深度好文）-简书</h2>
       <p class="title-p">
-        <span>新华网</span>
-        <span>2017/05/06</span>
+        <span>{{reprint}}</span>
+        <span>{{time}}</span>
       </p>
-      <p class="text-p">
-        边大多的80、90后都能够遵守工序良俗，他们会主动地让座边大多的80、90后都能
-        代付款等飞哥二哥代付款等飞哥二哥代付款等飞哥二哥代付款等飞哥二哥
-        代付款等飞哥二哥代付款等飞哥二哥代付款等飞哥二哥代付款等飞哥二哥
-        代付款等飞哥二哥代付款等飞哥二哥代付款等飞哥二哥代付款等飞哥二哥代付款等飞哥二哥
-        代付款等飞哥二哥代付款等飞哥二哥代付款等飞哥二哥代付款等飞哥二哥
-        代付款等飞哥二哥代付款等飞哥二哥代付款等飞哥二哥代付款等飞哥二哥
-        代付款等飞哥二哥代付款等飞哥二哥代付款等飞哥二哥代付款等飞哥二哥代付款等飞哥二哥代付款等飞哥二哥代付款等飞哥二哥代付款等飞哥二哥代付款等飞哥二哥代付款等飞哥二哥代付款等飞哥二哥代付款等飞哥二哥代付款等飞哥二哥代付款等飞哥二哥
-        代付款等飞哥二哥代付款等飞哥二哥代付款等飞哥二哥代付款等飞哥二哥
-        代付款等飞哥二哥代付款等飞哥二哥代付款等飞哥二哥代付款等飞哥二哥
-        代付款等飞哥二哥代付款等飞哥二哥代付款等飞哥二哥代付款等飞哥二哥
-        代付款等飞哥二哥代付款等飞哥二哥代付款等飞哥二哥代付款等飞哥二哥代付款等飞哥二哥
-        代付款等飞哥二哥代付款等飞哥二哥代付款等飞哥二哥代付款等飞哥二哥
-        代付款等飞哥二哥代付款等飞哥二哥代付款等飞哥二哥
+      <p class="text-p" v-html="detail" ref="ssss">
+
       </p>
     </div>
     <bar></bar>
@@ -52,36 +40,57 @@
     },
     data () {
       return {
-        xinde:[
-          {
-            "p":"是哦的减肥威迫我外婆额日哦位人品为排位人品为例",
-            "img":"../../../static/images/xinde.jpg",
-            "span1":"心得方法",
-            "span2":"2017/05/06"
-          },
-          {
-            "p":"是哦的减肥威迫我外婆额日哦位人品为排位人品为例",
-            "img":"../../../static/images/xinde.jpg",
-            "span1":"考生必读",
-            "span2":"2017/05/06"
-          },
-          {
-            "p":"是哦的减肥威迫我外婆额日哦位人品为排位人品为例",
-            "img":"../../../static/images/xinde.jpg",
-            "span1":"考生必读",
-            "span2":"2017/05/06"
-          },
-          {
-            "p":"是哦的减肥威迫我外婆额日哦位人品为排位人品为例",
-            "img":"../../../static/images/xinde.jpg",
-            "span1":"考生必读",
-            "span2":"2017/05/06"
-          }
-        ]
+        ids:'',
+        xinde:[],
+        title:'',
+        time:'',
+        reprint:'',
+        detail:''
       }
     },
+    updated() {
+//      console.log(this.$refs.ssss);
+//      let img=document.getElementsByTagName('img');
+//      console.log(img)
+    },
     created(){
+      this.ids=this.$route.query.ids;
       this.menu();
+      let that=this;
+      /*
+      * 文章详情
+      *参数 id
+       参数	说明
+        id	文章ID
+        content > title	文章标题
+        created_at	创建时间
+        reprint	文章出处  若是为空 可填写“本站” 或者 “专本科学历网”
+        hits	点击数
+        detail	文章内容  html富文本
+        data > title	网页title
+         keywords	网页 keywords
+        description	网页description
+      *
+      * */
+      this.$http.get('/api/item/article-item.html',{params: {id: this.ids}})
+        .then(function (response) {
+          that.title=response.data.data.content[0].title;
+          that.time=response.data.data.content[0].created_at;
+          if(response.data.data.content[0].reprint){
+            that.reprint=response.data.data.content[0].reprint;
+          }else{
+            that.reprint='专本科学历网'
+          }
+          that.detail=response.data.data.content[0].detail;
+//          console.log(that.detail)
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
+    mounted(){
+
+
     },
     methods:{
       menu() {
@@ -97,7 +106,7 @@
   .title-h h2{
     color: black;
     font-size: 1.1rem;
-    line-height: 2.3rem;
+    line-height: 1.8rem;
   }
   .title-p span{
     line-height: 2rem;

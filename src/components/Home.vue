@@ -246,9 +246,9 @@
       skipWorkList(){
         this.$router.push({
           path:'/worklist',
-//          query:{
-//            titles:"文章列表总览"
-//          }
+          query:{
+            titles:"热门文章"
+          }
         })
 
       }
