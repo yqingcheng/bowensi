@@ -7,7 +7,7 @@
     <div class="myself">
       <div class="myself-bar">
         <span class="span1">网教</span>
-        <span class="span2">更多&nbsp;>>></span>
+        <span class="span2" @click="moress">更多&nbsp;>>></span>
       </div>
       <zhuanti
       :xinde="xinde"></zhuanti>
@@ -33,7 +33,9 @@
       return {
         xinde:[],
         titles:[
-          {titles:'网教文章'}
+          {
+            titles:'网教文章'
+          }
         ]
       }
     },
@@ -52,18 +54,18 @@
       *
       * */
       this.$http.get('/api/default/hot-article.html',{params: {category_id: 7}})
-        .then(function (response) {
+        .then((response) => {
           that.xinde=response.data.data;
-
         })
-        .catch(function (error) {
-          console.log(error);
-        });
     },
     methods:{
       menu() {
         window.scrollTo(0,0);
-      }
+      },
+      /*跳转到专题列表*/
+      moress(){
+        this.$router.push('/special')
+      },
     }
   }
 </script>
@@ -74,7 +76,6 @@
     justify-content: space-between;
     padding: 1rem 1rem 0 1rem;
   }
-
   .myself-bar .span1{
     color: #4887d0;
     font-family: "Microsoft YaHeikaiti";

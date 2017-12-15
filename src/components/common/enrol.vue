@@ -6,7 +6,7 @@
     <div class="enroi">
       <p>{{propp[0].text}}</p>
       <ul class="enroi-guide" >
-        <li v-for="item in propp[1].list">
+        <li v-for="(item,index) in propp[1].list":key="item.id" @click="getid(index)">
           {{item.keyword_name}}
         </li>
       </ul>
@@ -28,6 +28,16 @@
     data () {
       return {
 
+      }
+    },
+    methods:{
+      getid(index){
+        this.$router.push({
+          path:'/worklist',
+          query:{
+            titles:"热门文章"
+          }
+        })
       }
     }
   }

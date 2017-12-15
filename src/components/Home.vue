@@ -30,7 +30,7 @@
           <!-- slides -->
           <swiper-slide >
             <ul >
-              <li v-for="(item,index) in schoolfirst" :key="item.id" @click="skipDetalis(index)">
+              <li v-for="(item,index) in schoolfirst" :key="item.id" @click="skipDetalis1(index)" >
                 <img :src="imgsrc+item.logo" alt="">
                 <p > {{item.name}}</p>
               </li>
@@ -38,7 +38,7 @@
           </swiper-slide>
           <swiper-slide >
             <ul >
-              <li v-for="(item,index) in schooltwo" :key="item.id" @click="skipDetalis(index)">
+              <li v-for="(item,index) in schooltwo" :key="item.id" @click="skipDetalis2(index)" >
                 <img :src="imgsrc+item.logo" alt="">
                 <p >{{item.name}}</p>
               </li>
@@ -46,7 +46,7 @@
           </swiper-slide>
           <swiper-slide >
             <ul >
-              <li v-for="(item,index) in schoolthree" :key="item.id" @click="skipDetalis(index)">
+              <li v-for="(item,index) in schoolthree" :key="item.id" @click="skipDetalis3(index)" >
                 <img :src="imgsrc+item.logo" alt="">
                 <p >{{item.name}}</p>
               </li>
@@ -54,12 +54,9 @@
           </swiper-slide>
           <!-- Optional controls -->
           <div class="swiper-pagination"  slot="pagination" id="qier">
-
           </div>
         </swiper>
-
       </div>
-
     </div>
     <ul class="myself-sc">
         <li>
@@ -90,14 +87,12 @@
         <p><b>依托互联网数据资源和自然语言处理技术优势</b></p>
         <img src="../../static/images/logoimg.jpg" alt="" @click="skipWorkList">
         <span class="mores">
-        <span>2017/05/03</span>
-        <span @click="moress">更多&nbsp;&nbsp;&nbsp;>>></span>
-      </span>
-
+          <span>2017/05/03</span>
+          <span @click="moress">更多&nbsp;&nbsp;&nbsp;>>></span>
+        </span>
         <div class="bar-v"></div>
       </div>
     </div>
-
     <logo></logo>
   </div>
 
@@ -110,17 +105,11 @@
   import logo from "./common/logo.vue";
   import {swiper, swiperSlide} from 'vue-awesome-swiper'
   import VueAwesomeSwiper from 'vue-awesome-swiper'
-
-  //加载swipercss文件
+  //需要手动加载swiper css文件
   require('swiper/dist/css/swiper.css');
   export default {
     name: 'home',
-    components:{
-      Lunbo,
-      Search,
-      swiper,swiperSlide,
-      enrol,bar,logo
-    },
+    components:{ Lunbo, Search, swiper, swiperSlide, enrol, bar, logo },
     data () {
       return {
         imgsrc:domain.testUrl,
@@ -141,8 +130,12 @@
           }
         },
         propp:[
-          {text:"报考指南"},
-          {list:[]}
+          {
+            text:"报考指南"
+          },
+          {
+            list:[]
+          }
         ],
         schoolfirst:[],
         schooltwo:[],
@@ -163,40 +156,30 @@
       * title	文章标题
       * */
       this.$http.get('/api/home/notice.html')
-        .then(function (response) {
+        .then((response) => {
           that.first=response.data.data.first;
           that.other=response.data.data.other;
-        })
-        .catch(function (error) {
-          console.log(error);
         });
       /*
       *报考指南
       *该关键字可点击可跳转  跳转页面是文章列表
       * keyword_name	关键字
-      * is_red 是否标红 0：不标 1：标红 （暂时不需要 忽略）
       * */
       this.$http.get('/api/default/guide.html')
-        .then(function (response) {
+        .then((response) => {
           that.propp[1].list=response.data.data;
-        })
-        .catch(function (error) {
-          console.log(error);
         });
       /*
       * 文章分类
-      *此接口汉字可用于首页热门文章分类  分类ID不会变 汉字可能会变  需要用到此分类ID的  ID值可写死
+      *此接口汉字可用于首页热门文章分类
       *id	类别ID
       * name	类别名称
       * */
       this.$http.get('/api/home/category.html')
-        .then(function (response) {
+        .then((response) => {
           response.data.data.forEach((item) => {
             that.list.push(item.name)
           });
-        })
-        .catch(function (error) {
-          console.log(error);
         });
       /*
       *热门院校
@@ -208,16 +191,11 @@
       * logo	院校LOGO
       * */
       this.$http.get('/api/home/school.html')
-        .then(function (response) {
+        .then((response) => {
           that.schoolfirst=response.data.data.hot.slice(0,8);
           that.schooltwo=response.data.data.hot.slice(8,16);
           that.schoolthree=response.data.data.hot.slice(16,23);
-        })
-        .catch(function (error) {
-          console.log(error);
         });
-
-
     },
     methods:{
       menu() {
@@ -225,24 +203,42 @@
       },
       /*
       * 函数detalis
-      * 跳转到院校详情
-      * query 传参数
+      * 跳转到院校详情页面
+      * query 传参数院校id
       * */
-      skipDetalis:function (index) {
+      skipDetalis1:function (index) {
         this.$router.push({
           path:'universitydetails/details',
           query:{
-            schoole:this.school[index].sc,
-            img:this.school[index].img,
+            id:this.schoolfirst[index].id
           }
         })
       },
+      skipDetalis2:function (index) {
+        this.$router.push({
+          path:'universitydetails/details',
+          query:{
+            id:this.schooltwo[index].id
+          }
+        })
+      },
+      skipDetalis3:function (index) {
+        this.$router.push({
+          path:'universitydetails/details',
+          query:{
+            id:this.schoolthree[index].id
+          }
+        })
+      },
+      /*跳转到院校页面*/
       more:function () {
         this.$router.push("/yuanxiao");
       },
+      /*跳转到专题列表*/
       moress(){
         this.$router.push('/special')
       },
+      /*跳转到文章列表 */
       skipWorkList(){
         this.$router.push({
           path:'/worklist',
@@ -250,7 +246,6 @@
             titles:"热门文章"
           }
         })
-
       }
     }
   }
@@ -290,7 +285,6 @@
   .academy div .span2{
     font-size: 0.7rem;
   }
-
   .academy ul li{
     border-right: 1px solid #ddd;
     border-top: 1px solid #ddd;
@@ -301,7 +295,6 @@
     box-sizing: border-box;
     text-align: center;
     padding: 1rem 0 0 0;
-
   }
   .academy ul li p{
     line-height: 1rem;
@@ -341,11 +334,6 @@
     height: 3rem;display: block;
     line-height: 3.3rem;
   }
-  /*.academy-wrap{*/
-    /*width:100%;*/
-    /*height:18.6rem;*/
-    /*border: 1px solid red;*/
-  /*}*/
   .swiper-slide img{ width:100%;height: 12.6rem}
   .router-link-active p{
     color: #73a1db;
@@ -384,6 +372,5 @@
     color: black;
     position: absolute;
     right: 1rem;
-
   }
 </style>

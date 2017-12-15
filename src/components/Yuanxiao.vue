@@ -5,7 +5,7 @@
   <div class="yuanxiao">
     <search></search>
     <!--iview下拉菜单-->
-    <Dropdown trigger="click" class="selectc" @on-click="changes">
+    <Dropdown trigger="click" class="selectc" @on-click="changes1">
       <a href="javascript:void(0)" >
           地区
         <Icon type="arrow-down-b"></Icon>
@@ -15,7 +15,7 @@
 
       </Dropdown-menu>
       </Dropdown>
-    <Dropdown trigger="click" class="selectc" @on-click="changes">
+    <Dropdown trigger="click" class="selectc" @on-click="changes2">
       <a href="javascript:void(0)">
         专业
         <Icon type="arrow-down-b"></Icon>
@@ -40,9 +40,6 @@
         </div>
       </div>
     </div>
-
-
-
   </div>
 </template>
 <script>
@@ -52,18 +49,15 @@
     components:{
       search
     },
-
     data () {
       return {
         imgsrc:domain.testUrl,
         canshu:"",
         users:[],
-        rows1:[
-
-        ],
-        rows2:[
-
-        ]
+        rows1:[],
+        rows2:[],
+        canshu1:'',
+        canshu2:''
       }
     },
     created(){
@@ -73,22 +67,20 @@
       /*
       *院校列表检索
       * */
+      console.log(this.canshu1);
       this.$http.post('/api/school/index.html').then(response => {
         that.users=response.data.data.data.content;
-        console.log(response.data.data.data.content)
       });
       /*
       * 城市列表
       * */
       this.$http.get('/api/school/city.html').then(response => {
-//        console.log(response.data.data);
         that.rows1=response.data.data;
       });
       /*
       * 专业名称
       * */
       this.$http.post('/api/school/major.html').then(response => {
-
         that.rows2=response.data.data;
       });
     },
@@ -115,17 +107,22 @@
       用query传递参数
       */
       skipDetalis:function(index){
-//        console.log(this.users[index].id)
         this.$router.push({
           path:'universitydetails/details',
           query:{
-            id:this.users[index].id
+            id:this.users[index].id,
+            major:this.users[index].major
           }
         })
       },
 //      函数 change ：改变下拉菜单中选项时，把值传递给参数 canshu
-      changes(name){
-        this.canshu=name;
+      changes1(name1){
+
+//        console.log(name1);
+        this.canshu1=name1
+      },
+      changes2(name2){
+        this.canshu2=name2;
       }
     }
   }
@@ -140,6 +137,15 @@
   }
   .ivu-dropdown-item{
     font-size: 0.8rem!important;
+    border: 1px solid red;
+  }
+
+  /*.ivu-dropdown-menu{*/
+    /*width: 10rem!important;*/
+  /*}*/
+  .ivu-select-dropdown{
+    background-color: #dcd1d1!important;
+    width: 30rem!important;
   }
   .selectc a{
     color: black;

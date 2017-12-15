@@ -26,7 +26,7 @@
     <input type="text" placeholder="姓名" ref="name">
     <input type="text" placeholder="电话" ref="phone">
     <textarea placeholder="说点什么吧..." ref="text"></textarea>
-    <p class="baoming" @click="ImmediatelySignUp">立即报名</p>
+    <!--<p class="baoming" @click="ImmediatelySignUp">立即报名</p>-->
     <p class="baoming" @click="ImmediateConsultation">立即咨询</p>
     <div class="bar-v"></div>
     <logo></logo>
@@ -50,33 +50,34 @@
         propp:[
           {text:"主要专业"},
           {
-            list:[
-              {"zhinan":"招生简章"},
-              {"zhinan":"热门专业"},
-              {"zhinan":"考试报名"},
-              {"zhinan":"考试时间"},
-              {"zhinan":"证书查询"},
-              {"zhinan":"院校推荐"},
-              {"zhinan":"招生简章"},
-              {"zhinan":"录取分数线"},
-              {"zhinan":"院校推荐"},
-              {"zhinan":"招生简章"},
-              {"zhinan":"院校推荐"},
-              {"zhinan":"招生简章"},
-            ]
+            list:[]
           }
         ],
         name:'',
         logo:'',
         description:'',
         label:'',
-        detail:''
+        detail:'',
+        arr:[]
       }
     },
     created(){
       this.menu();
       this.id=this.$route.query.id;
+      this.major=this.$route.query.major;
       let that=this;
+      /*
+      * 获取专业名称
+      * */
+
+      this.$http.post('/api/school/major-name.html',{params:{major:this.major}})
+        .then(response => {
+//            console.log(response)
+      });
+
+      /*
+      * 院校详情
+      * */
       this.$http.get('/api/item/school-item.html',{params: {id: this.id}})
         .then(response => {
 //          console.log(response.data.data.content);
@@ -85,6 +86,13 @@
           that.description=response.data.data.content.description;
           that.label=response.data.data.content.label;
           that.detail=response.data.data.content.detail;
+//          console.log(response.data.data.content.major_major);
+          that.arr=response.data.data.content.major_major.split(',');
+//          console.log(that.arr);
+          for(let i=0;i<that.arr.length;i++){
+//            console.log(i);
+            that.propp[1].list.push({keyword_name:that.arr[i]})
+          }
         })
 
     },
@@ -97,20 +105,21 @@
         window.scrollTo(0,0);
       },
 //      立即报名函数
-      ImmediatelySignUp(){
+      ImmediateConsultation(){
         console.log("姓名："+this.$refs.name.value,"电话："+this.$refs.phone.value,
                     "text:"+this.$refs.text.value);
         this.$http.post('/api/school/message.html',
-          {params: {name: this.$refs.name.value}})
+          {params:{ 'name': this.$refs.name.value}})
           .then(response => {
 //            console.log(response.data.data.msg)
+
             alert(response.data.data.msg)
           })
-      },
-//      立即查询函数
-      ImmediateConsultation(){
-        console.log(22)
       }
+//      立即查询函数
+//      ImmediateConsultation(){
+//        console.log(22)
+//      }
     }
   }
 </script>

@@ -1,3 +1,6 @@
+
+<!--------------------------------一级页面------------------------------>
+
 <template>
   <div class="hello">
     <div class="wrap">
@@ -51,24 +54,10 @@
     <div class="top-wrap"></div>
     <div> <router-view></router-view> </div>
   </div>
-
 </template>
-
 <script>
-
-
-
   export default {
     name: 'hello',
-//    watch:{
-//      '$route':function(to,from){
-//        document.body.scrollTop = 0;
-//                 document.documentElement.scrollTop = 0;
-//      }
-//    },
-    components:{
-
-    },
     data () {
       return {
         isshow:false,
@@ -77,24 +66,27 @@
     },
     created(){
       let that=this;
+      /*
+      *导航文字
+      * 参数 label：导航名称
+      * */
       this.$http.get('/api/default/index.html')
-        .then(function (response) {
+        .then((response) => {
           response.data.data.items.forEach((item) => {
             that.items.push(item.label)
           })
-        })
-        .catch(function (error) {
-          console.log(error);
         });
     },
-
     methods:{
+      /*跳转到题库页面*/
       skip:function () {
         this.$router.push("/Tiku")
       },
+      /*返回上一个页面*/
       backto:function () {
         this.$router.back(-1)
       },
+      /*控制返回icon是否显示*/
       homes:function (e) {
         if(!e){e=window.event}
         if(e.target.textContent==="首页"){
@@ -102,12 +94,10 @@
         }else{
           this.isshow=true;
         }
-
       }
     }
   }
 </script>
-
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   *{
@@ -154,7 +144,6 @@
   #sto{
     font-size: 0.85rem;
   }
-
   .uls a{
     color: black;
     text-decoration: none;
@@ -175,7 +164,6 @@
   .top-wrap{
     width: 100%;
     height: 5.4rem;
-
   }
 
 </style>

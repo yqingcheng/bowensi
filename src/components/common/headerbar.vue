@@ -2,6 +2,7 @@
 <!--------------------------博文思教育带书标头部------------------------->
 
 <template>
+
   <div class="headerbar">
     <div class="wrap-top">
       <span @click="backto">
@@ -12,6 +13,7 @@
         <img src="../../../static/images/tiku.png" alt="">
       </span>
     </div>
+    <div class="wrap-topwrap"></div>
   </div>
 </template>
 <script>
@@ -41,6 +43,12 @@
     display: flex;
     align-items: center;
     color: white;
+    position: fixed;
+    z-index: 99999999;
+  }
+  .wrap-topwrap{
+    width:100%;
+    height: 2.8rem;
   }
   .wrap-top span:first-child{
     line-height: 100%;

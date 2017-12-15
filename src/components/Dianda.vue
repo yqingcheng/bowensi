@@ -7,7 +7,7 @@
     <div class="myself">
       <div class="myself-bar">
         <span class="span1">电大</span>
-        <span class="span2" >更多&nbsp;>>></span>
+        <span class="span2" @click="moress">更多&nbsp;>>></span>
       </div>
       <zhuanti
       :xinde="xinde"></zhuanti>
@@ -33,7 +33,9 @@
       return {
         xinde:[],
         titles:[
-          {titles:'电大文章'}
+          {
+            titles:'电大文章'
+          }
         ]
       }
     },
@@ -62,6 +64,10 @@
     methods:{
       menu() {
         window.scrollTo(0,0);
+      },
+      /*跳转到专题列表*/
+      moress(){
+        this.$router.push('/special')
       }
     }
   }
@@ -73,7 +79,6 @@
     justify-content: space-between;
     padding: 1rem 1rem 0 1rem;
   }
-
   .myself-bar .span1{
     color: #4887d0;
     font-family: "Microsoft YaHeikaiti";

@@ -9,10 +9,16 @@
     <bar></bar>
     <div class="myself-bar">
       <span class="span1">最新专题</span>
-      <span class="span2">更多&nbsp;>>></span>
     </div>
-    <zhuanti
-    :xinde="xinde"></zhuanti>
+    <ul class="special-list">
+      <li v-for="(item,index) in list":key="item.id" @click="skipSpecialList(index)">
+        <div>
+          <p>{{item.name}}</p>
+          <p>{{item.update_time}}</p>
+        </div>
+        <img :src="imgsrc+item.image" alt="">
+      </li>
+    </ul>
     <logo></logo>
   </div>
 </template>
@@ -21,27 +27,27 @@
   import search from "../common/Search.vue";
   import footbar from "../common/footbar.vue";
   import bar from "../common/bar.vue";
-  import zhuanti from "../common/zhuanti.vue";
   import logo from "../common/logo.vue";
 
   export default {
     name: 'special',
     components:{
-      headerbar,search,footbar,bar,zhuanti,logo
+      headerbar,search,footbar,bar,logo
     },
     data () {
       return {
+        imgsrc:domain.testUrl,
         titles:[
           {titles:'热门文章'}
-        ],
-        xinde:[]
+          ],
+        list:[]
       }
     },
     created(){
       this.menu();
       let that=this;
       /*
-      * 热门文章
+      *专题列表
       *此接口可用于首页、自考、网教、电大、成考页面 会根据不同的分类ID 返回不同类型的热门文章
       *参数 category_id "6" 电大
        id	文章ID
@@ -51,37 +57,60 @@
       name	文章小类别
       *
       * */
-      this.$http.get('/api/special/special-all.html',{params: {category_id: 5}})
+      this.$http.get('/api/special/special-all.html')
         .then(function (response) {
-          console.log(response.data.data)
-        })
-        .catch(function (error) {
-          console.log(error);
+          that.list=response.data.data.data;
         });
     },
     methods:{
       menu() {
         window.scrollTo(0,0);
       },
-
+      skipSpecialList(index){
+        this.$router.push({
+          path:'/speciallist',
+          query:{
+            id:this.list[index].id
+          }
+        })
+      }
     }
   }
 </script>
 <style scoped>
   .myself-bar{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     padding: 1rem 1rem 0 1rem;
   }
-
   .myself-bar .span1{
     color: #4887d0;
     font-family: "Microsoft YaHeikaiti";
     font-size: 1.2rem;
     font-weight: 600;
   }
-  .myself-bar .span2{
-    font-size: 0.8rem;
+  .special-list li{
+    border-bottom: 1px solid #ddd;
+    padding: 1rem;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
   }
+  .special-list li img{
+    width: 6.5rem;
+    height: 3.8rem;
+    display: block;
+  }
+  .special-list li p:nth-child(1){
+    color: indianred;
+    font-size: 1rem;
+  }
+  .special-list li p:nth-child(2){
+    color: #bbb;
+    font-size: 0.7rem;
+  }
+  .special-list li div{
+    width: 12rem;
+  }
+
+
+
 </style>

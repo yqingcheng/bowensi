@@ -16,7 +16,7 @@ import details from '@/components/universitydetails/details'
 import article from '@/components/articleList/article'
 import special from '@/components/special/special'
 import worklist from '@/components/worklist/worklist'
-
+import speciallist from '@/components/speciallist/speciallist'
 
 Vue.use(Router);
 
@@ -110,8 +110,11 @@ export default new Router({
       path:'/worklist',
       name:'worklist',
       component:worklist
+    },
+    {
+      path:'/speciallist',
+      name:'speciallist',
+      component:speciallist
     }
-
-
   ]
 })

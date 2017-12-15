@@ -6,7 +6,7 @@
     <headerbar></headerbar>
     <select v-model="selected" ref="onsss" @change="selectedd">
       <option>题库列表</option>
-      <option v-for="item in fenlei">{{keywords1}}</option>
+      <option v-for="item in fenlei">{{item.name}}</option>
     </select>
     <ul class="down-list" v-show="isshow1">
       <li v-for="item in list1">
@@ -66,29 +66,19 @@
 //      *
 //      * */
       this.$http.get('/api/tiku/list.html',{params: {category_id: 182}})
-        .then(function (response) {
+        .then((response) => {
           that.list1=response.data.data.data.list;
-          that.keywords1=response.data.data.data.keywords
-        })
-        .catch(function (error) {
-          console.log(error)
+          that.keywords1=response.data.data.data.keywords;
         });
       this.$http.get('/api/tiku/list.html',{params: {category_id: 181}})
-        .then(function (response) {
+        .then((response) => {
           that.list2=response.data.data.data.list;
-          that.keywords2=response.data.data.data.keywords
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
+          that.keywords2=response.data.data.data.keywords;
+        });
       this.$http.get('/api/tiku/index.html')
-        .then(function (response) {
-          console.log(response.data.data)
-          that.fenlei=response.data.data
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
+        .then((response) => {
+          that.fenlei=response.data.data;
+        });
     },
 //    computed:{
 //      /*
