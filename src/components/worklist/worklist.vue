@@ -31,33 +31,26 @@
       let that=this;
       this.titles=this.$route.query.titles;
       /*
-      * 热门文章
-      *此接口可用于首页、自考、网教、电大、成考页面 会根据不同的分类ID 返回不同类型的热门文章
-      *参数 category_id "5" 自考
-       id	文章ID
-      title	文章标题
-      created_at	发布时间
-      image	文章图片  若没有图片则自行填补上对应的图片  （可找设计）
-      name	文章小类别
-      *
+      * 判断 热门文章列表，自考文章列表，电大文章列表，网教文章列表，成考文章列表
+      * 根绝不同分类ID获取不同数据
       * */
       if(this.titles==='热门文章'){
         this.$http.get('/api/list/article-list.html',{params: {category_id: 5}})
-          .then(function (response) {
+          .then((response) => {
             response.data.data.data.forEach((item) => {
               that.xinde.push(item)
             });
           });
 
         this.$http.get('/api/list/article-list.html',{params: {category_id: 6}})
-          .then(function (response) {
+          .then((response) => {
             response.data.data.data.forEach((item) => {
               that.xinde.push(item)
             });
           });
 
         this.$http.get('/api/list/article-list.html',{params: {category_id: 7}})
-          .then(function (response) {
+          .then((response) => {
             response.data.data.data.forEach((item) => {
               that.xinde.push(item)
             });
@@ -72,28 +65,28 @@
 
       }else if(this.titles==='自考文章'){
         this.$http.get('/api/list/article-list.html',{params: {category_id: 5}})
-          .then(function (response) {
+          .then((response) => {
             response.data.data.data.forEach((item) => {
               that.xinde.push(item)
             });
           });
       }else if(this.titles==='电大文章'){
         this.$http.get('/api/list/article-list.html',{params: {category_id: 6}})
-          .then(function (response) {
+          .then((response) => {
             response.data.data.data.forEach((item) => {
               that.xinde.push(item)
             });
           });
       }else if(this.titles==='网教文章'){
         this.$http.get('/api/list/article-list.html',{params: {category_id: 7}})
-          .then(function (response) {
+          .then((response) => {
             response.data.data.data.forEach((item) => {
               that.xinde.push(item)
             });
           });
       }else if(this.titles==='成考文章'){
         this.$http.get('/api/list/article-list.html',{params: {category_id: 8}})
-          .then(function (response) {
+          .then((response) => {
             response.data.data.data.forEach((item) => {
               that.xinde.push(item)
             });

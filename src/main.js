@@ -9,11 +9,15 @@ import iView from 'iview'; // 导入组件库
 import 'iview/dist/styles/iview.css'; // 导入样式
 import axios from 'axios';
 import domain from './domain.js';
+import qs from 'qs';
+
 global.domain = domain;
 
-Vue.use(iView);
 Vue.prototype.$http = axios;
 
+Vue.prototype.$http.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
+Vue.use(iView);
+Vue.prototype.$qs = qs;
 Vue.config.productionTip = false;
 Vue.use(VueAwesomeSwiper);
 

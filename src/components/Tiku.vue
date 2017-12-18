@@ -11,14 +11,14 @@
     <ul class="down-list" v-show="isshow1">
       <li v-for="item in list1">
         <p><b>{{item.title}}</b></p>
-        <span class="spoan1">{{item.created_at}}</span>
+        <span class="spoan1">{{new Date(parseInt(item.created_at) * 1000).toLocaleDateString()}}</span>
         <span class="spoan2">{{keywords1}}</span>
       </li>
     </ul>
     <ul class="down-list" v-show="isshow2">
       <li v-for="item in list2">
         <p><b>{{item.title}}</b></p>
-        <span class="spoan1">{{item.created_at}}</span>
+        <span class="spoan1">{{new Date(parseInt(item.created_at) * 1000).toLocaleDateString()}}</span>
         <span class="spoan2">{{keywords2}}</span>
       </li>
     </ul>
@@ -46,25 +46,11 @@
     },
     created(){
       this.menu();
-
       let that=this;
-//      /*
-//      * 题库列表
-//      *此接口可用于首页、自考、网教、电大、成考页面 会根据不同的分类ID 返回不同类型的热门文章
-//      *参数 category_id
-//      page	分页信息
-//      pageParam	获取下一页的的参数 e.g.  xxx/xxx.html?page=2
-//      totalCount	一共数据量
-//      defaultPageSize	一页数据量
-//      data	数据
-//      data > title	题库页面title
-//      keywords	题库页面keywords
-//      description	题库页面description
-//      list	数据列表
-//      list > title	文章标题
-//      created_at	文章发布时间
-//      *
-//      * */
+      /*
+      * 历年真题题库列表，模拟试题题库列表
+      * 根据 分类category_id请求数据
+      * */
       this.$http.get('/api/tiku/list.html',{params: {category_id: 182}})
         .then((response) => {
           that.list1=response.data.data.data.list;
@@ -104,6 +90,10 @@
       menu() {
         window.scrollTo(0,0);
       },
+      /*
+      * 下拉菜单
+      * 判断选中内容改变显示内容
+      * */
       selectedd() {
         if(this.selected===this.keywords1){
           this.isshow2=false;
@@ -122,9 +112,7 @@
   }
 </script>
 <style scoped>
-
   select{
-
     border: 1px solid #ddd;
     color: #aaa;
     margin: 1.1rem auto;
@@ -168,5 +156,4 @@
     margin: 0;
     padding: 0;
   }
-
 </style>

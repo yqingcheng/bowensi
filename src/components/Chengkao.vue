@@ -40,17 +40,7 @@
         propp:[
           {text:"主要专业"},
           {
-            list:[
-              {"zhinan":"招生简章"},
-              {"zhinan":"热门专业"},
-              {"zhinan":"考试报名"},
-              {"zhinan":"考试时间"},
-              {"zhinan":"证书查询"},
-              {"zhinan":"院校推荐"},
-              {"zhinan":"招生简章"},
-              {"zhinan":"录取分数线"}
-
-            ]
+            list:[]
           }
         ],
         xinde:[],
@@ -65,16 +55,15 @@
       this.menu();
       let that=this;
       /*
-      * 热门文章
-      *此接口可用于首页、自考、网教、电大、成考页面 会根据不同的分类ID 返回不同类型的热门文章
-      *参数 category_id "8" 成考
-       id	文章ID
-      title	文章标题
-      created_at	发布时间
-      image	文章图片  若没有图片则自行填补上对应的图片  （可找设计）
-      name	文章小类别
-      *
-      * */
+       * 热门文章
+       *此接口可用于首页、自考、网教、电大、成考页面 会根据不同的分类ID 返回不同类型的热门文章
+       *参数 category_id "8" 成考
+       *id	文章ID
+       *title	文章标题
+       *created_at	发布时间
+       *image	文章图片  若没有图片则自行填补上对应的图片  （可找设计）
+       *name	文章小类别
+       * */
       this.$http.get('/api/default/hot-article.html',{params: {category_id: 8}})
         .then((response) => {
           that.xinde=response.data.data;

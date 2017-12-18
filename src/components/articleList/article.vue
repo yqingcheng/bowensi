@@ -9,7 +9,7 @@
       <h2>（深度好文）-简书</h2>
       <p class="title-p">
         <span>{{reprint}}</span>
-        <span>{{time}}</span>
+        <span>{{new Date(parseInt(time) * 1000).toLocaleDateString()}}</span>
       </p>
       <p class="text-p" v-html="detail" ref="ssss">
 
@@ -19,10 +19,14 @@
     <div class="myself">
       <div class="myself-bar">
         <span class="span1">推荐阅读</span>
-        <span class="span2" >更多&nbsp;>>></span>
+        <span class="span2" @click="skipSpecial">更多&nbsp;>>></span>
       </div>
-      <zhuanti
-      :xinde="xinde"></zhuanti>
+      <ul class="noticc-list">
+        <li v-for="(item,index) in tuijian" :key="item.id" @click="skipNext(index)">
+          <p>{{item.title}}</p>
+          <span>{{new Date(parseInt(item.created_at) * 1000).toLocaleDateString()}}</span>
+        </li>
+      </ul>
     </div>
     <logo></logo>
   </div>
@@ -32,26 +36,21 @@
   import bar from "../common/bar.vue"
   import logo from "../common/logo.vue"
   import myself from "../seconedrouter/myself.vue"
-  import zhuanti from "../common/zhuanti.vue"
   export default {
     name: 'article',
     components:{
-      headerbar,bar,logo,myself,zhuanti
+      headerbar,bar,logo,myself
     },
     data () {
       return {
+        imgsrc:domain.testUrl,
         ids:'',
-        xinde:[],
         title:'',
         time:'',
         reprint:'',
-        detail:''
+        detail:'',
+        tuijian:[]
       }
-    },
-    updated() {
-//      console.log(this.$refs.ssss);
-//      let img=document.getElementsByTagName('img');
-//      console.log(img)
     },
     created(){
       this.ids=this.$route.query.ids;
@@ -60,17 +59,16 @@
       /*
       * 文章详情
       *参数 id
-       参数	说明
-        id	文章ID
-        content > title	文章标题
-        created_at	创建时间
-        reprint	文章出处  若是为空 可填写“本站” 或者 “专本科学历网”
-        hits	点击数
-        detail	文章内容  html富文本
-        data > title	网页title
-         keywords	网页 keywords
-        description	网页description
-      *
+      *参数	说明
+      *  id	文章ID
+      *  content > title	文章标题
+      *  created_at	创建时间
+      *   reprint	文章出处  若是为空 可填写“本站” 或者 “专本科学历网”
+      *  hits	点击数
+      *  detail	文章内容  html富文本
+      *  data > title	网页title
+      *  keywords	网页 keywords
+      *  description	网页description
       * */
       this.$http.get('/api/item/article-item.html',{params: {id: this.ids}})
         .then(function (response) {
@@ -81,20 +79,28 @@
           }else{
             that.reprint='专本科学历网'
           }
-          that.detail=response.data.data.content[0].detail;
-//          console.log(that.detail)
-        })
-        .catch(function (error) {
-          console.log(error);
+          that.detail=response.data.data.content[0].detail.replace('<img src=\"',"<img style='width:100%' src=\""+that.imgsrc);
+          console.log(that.detail)
         });
-    },
-    mounted(){
-
-
+      this.$http.get('/api/item/relevant.html',{params: {id: this.ids}})
+        .then((response) => {
+          that.tuijian=response.data.data
+        })
     },
     methods:{
       menu() {
         window.scrollTo(0,0);
+      },
+      skipNext(index){
+        this.$router.push({
+          path:'../backs',
+          query:{
+            ids:this.tuijian[index].id
+          }
+        })
+      },
+      skipSpecial(){
+        this.$router.push('../special')
       }
     }
   }
@@ -133,6 +139,17 @@
     font-weight: 600;
   }
   .myself-bar .span2{
+    font-size: 0.8rem;
+  }
+  .noticc-list li{
+    border: 1px solid #f1f1f1;
+    font-family: "Microsoft YaHeikaiti";
+    font-size: 0.8rem;
+    padding: 0.7rem ;
+    line-height: 1.2rem;
+  }
+  .noticc-list li span{
+    color: #bbb;
     font-size: 0.8rem;
   }
 

@@ -44,7 +44,6 @@
 //            console.log(swiper)
           }
         }
-
       }
     },
     computed: {
@@ -53,25 +52,19 @@
     created(){
       let that=this;
       this.$http.get('/api/home/figure.html')
-        .then(function (response) {
-
+        .then((response) => {
           that.imsg=response.data.data;
-
-//          response.data.data.items.forEach((item) => {
-//            console.log(item.label);
-//            that.items.push(item.label)
-//          })
         })
-        .catch(function (error) {
-          console.log(error);
-        });
     },
-    mounted () {
-
-    }
   }
 </script>
 <style scoped>
-  .lunbo{ width:100%;height:10.4rem}
-  .swiper-slide img{ width:100%;height: 10.4rem}
+  .lunbo{
+    width:100%;
+    height:10.4rem
+  }
+  .swiper-slide img{
+    width:100%;
+    height: 10.4rem
+  }
 </style>

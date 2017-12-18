@@ -7,13 +7,13 @@
     <lunbo></lunbo>
     <div class="gonggao"></div>
     <ul class="notic-list" >
-      <li>
+      <li @click="firstSkip">
         <p>{{first.title}}</p>
-        <span>{{first.created_at}}</span>
+        <span>{{new Date(parseInt(first.created_at) * 1000).toLocaleDateString()}}</span>
       </li>
-      <li v-for="item in other">
+      <li v-for="(item,index) in other" :key="item.id" @click="otherSkip(index)">
         <p>{{item.title}}</p>
-        <span>{{item.created_at}}</span>
+        <span>{{new Date(parseInt(first.created_at) * 1000).toLocaleDateString()}}</span>
       </li>
     </ul>
     <bar></bar>
@@ -159,6 +159,7 @@
         .then((response) => {
           that.first=response.data.data.first;
           that.other=response.data.data.other;
+
         });
       /*
       *报考指南
@@ -244,6 +245,23 @@
           path:'/worklist',
           query:{
             titles:"热门文章"
+          }
+        })
+      },
+      /*跳转到文章详情*/
+      firstSkip(){
+        this.$router.push({
+          path:'../article',
+          query:{
+            ids:this.first.id
+          }
+        })
+      },
+      otherSkip(index){
+        this.$router.push({
+          path:'../article',
+          query:{
+            ids:this.other[index].id
           }
         })
       }
@@ -359,7 +377,7 @@
     justify-content: space-between;
   }
   .mores span:last-child{
-    color: black;
+    color: #888;
   }
   .bar-v{
     width: 100%;

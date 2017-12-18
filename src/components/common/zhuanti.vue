@@ -9,7 +9,7 @@
           <p class="texxx">{{item.title}}</p>
           <p class="xinde-fn">
             <span><b>{{item.name}}</b></span>
-            <span>{{item.created_at}}</span>
+            <span>{{new Date(parseInt(item.created_at) * 1000).toLocaleDateString()}}</span>
           </p>
         </div>
         <img :src="item.image" alt="">
@@ -41,8 +41,7 @@
           query:{
             ids:this.xinde[index].id
           }
-        }
-        );
+        });
       },
     }
 

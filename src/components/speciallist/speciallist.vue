@@ -22,7 +22,6 @@
   import bar from "../common/bar.vue";
   import logo from "../common/logo.vue";
   import zhuanti from "../common/zhuanti.vue";
-
   export default {
     name: 'speciallist',
     components:{
@@ -30,13 +29,11 @@
     },
     data () {
       return {
-
         imgsrc:domain.testUrl,
         titles:[
           {titles:'热门文章'}
         ],
         xinde:[],
-
       }
     },
     created(){
@@ -47,7 +44,7 @@
       * 专题文章列表
       * */
       this.$http.get('/api/list/special-list.html',{params: {special_id: that.id}})
-        .then(function (response) {
+        .then((response) => {
           that.xinde=response.data.data.data;
         });
     },

@@ -29,20 +29,16 @@
       * 热门文章
       *此接口可用于首页、自考、网教、电大、成考页面 会根据不同的分类ID 返回不同类型的热门文章
       *参数 category_id "5" 自考
-       id	文章ID
-      title	文章标题
-      created_at	发布时间
-      image	文章图片  若没有图片则自行填补上对应的图片  （可找设计）
-      name	文章小类别
-      *
+      *id	文章ID
+      *title	文章标题
+      *created_at	发布时间
+      *image	文章图片  若没有图片则自行填补上对应的图片  （可找设计）
+      *name	文章小类别
       * */
       this.$http.get('/api/default/hot-article.html',{params: {category_id: 5}})
-        .then(function (response) {
+        .then((response) => {
           that.xinde=response.data.data;
         })
-        .catch(function (error) {
-          console.log(error);
-        });
     },
     methods:{
       pageto:function () {

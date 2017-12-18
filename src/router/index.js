@@ -17,6 +17,7 @@ import article from '@/components/articleList/article'
 import special from '@/components/special/special'
 import worklist from '@/components/worklist/worklist'
 import speciallist from '@/components/speciallist/speciallist'
+import backs from '@/components/common/backs'
 
 Vue.use(Router);
 
@@ -115,6 +116,11 @@ export default new Router({
       path:'/speciallist',
       name:'speciallist',
       component:speciallist
+    },
+    {
+      path:'/backs',
+      name:'backs',
+      component:backs
     }
   ]
 })
