@@ -4,10 +4,10 @@
 <template>
   <div class="footbar">
     <div class="footbar-img">
-      <p><b>依托互联网数据资源和自然语言处理技术优势</b></p>
-      <img src="../../../static/images/logoimg.jpg" alt="" @click="skipto">
+      <p><b>{{speciallist[0].name}}</b></p>
+      <img :src="imgsrc + speciallist[0].image" alt="" @click="skipto">
       <span class="mores">
-        <span>2017/05/03</span>
+        <span>{{new Date(parseInt(speciallist[0].create_time) * 1000).toLocaleDateString()}}</span>
       </span>
       <div class="bar-v"></div>
     </div>
@@ -20,6 +20,14 @@
       titles: {
         type: Array,
         required: true
+      },
+      speciallist:{
+        type: Array,
+        required: true
+      },
+      categoryid:{
+        type: Array,
+        required: true
       }
     },
     components:{
@@ -27,18 +35,18 @@
     },
     data () {
       return {
-
+        imgsrc:domain.testUrl
       }
     },
+
     methods:{
       skipto(){
         this.$router.push({
           path:'/worklist',
           query:{
-            titles:this.titles[0].titles
+            categoryid:this.categoryid[0].categoryid
           }
         })
-
       }
     }
   }

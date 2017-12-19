@@ -69,6 +69,7 @@
        * */
       this.$http.post('/api/school/index.html').then(response => {
         that.users=response.data.data.data.content;
+        console.log(response)
       });
       /*
        * 城市列表

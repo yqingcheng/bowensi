@@ -9,14 +9,14 @@
       <option v-for="item in fenlei">{{item.name}}</option>
     </select>
     <ul class="down-list" v-show="isshow1">
-      <li v-for="item in list1">
+      <li v-for="(item,index) in list1" :key="item.id" @click="skipWenzhangliebaio1(index)">
         <p><b>{{item.title}}</b></p>
         <span class="spoan1">{{new Date(parseInt(item.created_at) * 1000).toLocaleDateString()}}</span>
         <span class="spoan2">{{keywords1}}</span>
       </li>
     </ul>
     <ul class="down-list" v-show="isshow2">
-      <li v-for="item in list2">
+      <li v-for="(item,index) in list2" :key="item.id" @click="skipWenzhangliebaio2(index)">
         <p><b>{{item.title}}</b></p>
         <span class="spoan1">{{new Date(parseInt(item.created_at) * 1000).toLocaleDateString()}}</span>
         <span class="spoan2">{{keywords2}}</span>
@@ -105,8 +105,23 @@
           this.isshow2=true;
           this.isshow1=true
         }
-
-      }
+      },
+      skipWenzhangliebaio1(index){
+        this.$router.push({
+          path:'./worklist',
+          query:{
+            inputval:this.list1[index].title
+          }
+        })
+      },
+      skipWenzhangliebaio2(index){
+        this.$router.push({
+          path:'./worklist',
+          query:{
+            inputval:this.list2[index].title
+          }
+        })
+      },
     },
 
   }

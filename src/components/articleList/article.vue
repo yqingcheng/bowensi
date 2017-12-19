@@ -80,7 +80,6 @@
             that.reprint='专本科学历网'
           }
           that.detail=response.data.data.content[0].detail.replace('<img src=\"',"<img style='width:100%' src=\""+that.imgsrc);
-          console.log(that.detail)
         });
       this.$http.get('/api/item/relevant.html',{params: {id: this.ids}})
         .then((response) => {

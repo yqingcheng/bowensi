@@ -13,7 +13,7 @@
       :xinde="xinde"></zhuanti>
     </div>
     <bar></bar>
-    <footbar :titles="titles"></footbar>
+    <footbar :titles="titles" :speciallist="speciallist" :categoryid="categoryid"></footbar>
     <logo></logo>
   </div>
 </template>
@@ -36,6 +36,16 @@
           {
             titles:'网教文章'
           }
+        ],
+        speciallist:[
+          {
+            speciallist:{}
+          }
+        ],
+        categoryid:[
+          {
+            categoryid:'7'
+          }
         ]
       }
     },
@@ -55,6 +65,12 @@
       this.$http.get('/api/default/hot-article.html',{params: {category_id: 7}})
         .then((response) => {
           that.xinde=response.data.data;
+        });
+      /*
+      * 网教热门专题*/
+      this.$http.get('/api/default/hot-special.html',{params: {category_id: 7}})
+        .then((response) => {
+          that.speciallist=response.data.data;
         })
     },
     methods:{

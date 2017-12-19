@@ -4,10 +4,18 @@
 <template>
   <div class="zikao">
     <search></search>
-    <enrol
-    :propp="propp"></enrol>
+    <enrol></enrol>
     <bar></bar>
-    <footbar :titles="titles"></footbar>
+    <div class="footbar">
+      <div class="footbar-img">
+        <p><b>{{name1}}</b></p>
+        <img :src="imgsrc + img1" alt="" @click="skipto">
+        <span class="mores">
+        <span>{{new Date(parseInt(time1) * 1000).toLocaleDateString()}}</span>
+      </span>
+        <div class="bar-v"></div>
+      </div>
+    </div>
     <bar></bar>
     <div class="myself">
       <div class="myself-bar">
@@ -18,8 +26,16 @@
       :xinde="xinde"></zhuanti>
     </div>
     <bar></bar>
-    <footbar
-      :titles="titles"></footbar>
+    <div class="footbar">
+      <div class="footbar-img">
+        <p><b>{{name2}}</b></p>
+        <img :src="imgsrc + img2" alt="" @click="skipto">
+        <span class="mores">
+        <span>{{new Date(parseInt(time2) * 1000).toLocaleDateString()}}</span>
+      </span>
+        <div class="bar-v"></div>
+      </div>
+    </div>
     <logo></logo>
   </div>
 </template>
@@ -27,29 +43,28 @@
   import search from "./common/Search.vue";
   import enrol from "./common/enrol.vue";
   import bar from "./common/bar.vue";
-  import footbar from "./common/footbar.vue";
   import myself from "./seconedrouter/myself.vue";
   import logo from "./common/logo.vue";
   import zhuanti from "./common/zhuanti.vue";
   export default {
     name: 'zikao',
     components:{
-      search,enrol,bar,footbar,myself,logo,zhuanti
+      search,enrol,bar,myself,logo,zhuanti
     },
     data () {
       return {
-        propp:[
-          {
-            text:"报考指南"
-          },
-          {
-            list:[]
-          }
-        ],
+        imgsrc:domain.testUrl,
         xinde:[],
         titles:[
           {titles:'自考文章'}
-        ]
+        ],
+        speciallist:[],
+        name1:'',
+        name2:'',
+        img1:'',
+        img2:'',
+        time1:'',
+        time2:''
       }
     },
     created(){
@@ -68,7 +83,19 @@
       this.$http.get('/api/default/hot-article.html',{params: {category_id: 5}})
         .then((response) => {
           that.xinde=response.data.data;
-        })
+        });
+      /*
+     * 自考热门专题*/
+      this.$http.get('/api/default/hot-special.html',{params: {category_id: 5}})
+        .then((response) => {
+          that.speciallist=response.data.data;
+          that.name1=response.data.data[0].name
+          that.name2=response.data.data[1].name
+          that.img1=response.data.data[0].image
+          that.img2=response.data.data[1].image
+          that.time1=response.data.data[0].create_time
+          that.time2=response.data.data[1].create_time
+        });
     },
     methods:{
       menu() {
@@ -78,7 +105,14 @@
       moress(){
         this.$router.push('/special')
       },
-
+      skipto(){
+        this.$router.push({
+          path:'/worklist',
+          query:{
+            categoryid:'5'
+          }
+        })
+      }
     }
   }
 </script>
@@ -97,5 +131,29 @@
   }
   .myself-bar .span2{
     font-size: 0.8rem;
+  }
+  .footbar-img p{
+    color: #1769c6;
+    margin-bottom: 1rem;
+    font-size: 0.8rem;
+    line-height: 0.9rem;
+  }
+  .footbar-img{
+    padding: 0.8rem 1rem 0 0.8rem;
+  }
+  .footbar-img img{
+    width: 100%;
+    height: 9.3rem;
+  }
+  .mores{
+    color: #ccc;
+    font-size: 0.7rem;
+  }
+
+  .bar-v{
+    width: 100%;
+    height: 0.1rem;
+    background: #f1f1f1;
+    margin-top: 0.7rem;
   }
 </style>

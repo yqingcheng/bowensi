@@ -24,8 +24,7 @@
 
     </div>
     <bar></bar>
-    <enrol
-      :propp="propp"></enrol>
+    <enrol></enrol>
     <bar></bar>
     <h2>报名咨询</h2>
     <input type="text" placeholder="姓名" ref="name">
@@ -51,12 +50,6 @@
         schoole:"",
         img:"",
         imgsrc:domain.testUrl,
-        propp:[
-          {text:"主要专业"},
-          {
-            list:[]
-          }
-        ],
         name:'',
         logo:'',
         description:'',
@@ -84,9 +77,9 @@
           that.label=response.data.data.content.label;
           that.detail=response.data.data.content.detail;
           that.arr=response.data.data.content.major_major.split(',');
-          for(let i=0;i<that.arr.length;i++){
-            that.propp[1].list.push({keyword_name:that.arr[i]})
-          }
+//          for(let i=0;i<that.arr.length;i++){
+//            that.propp[1].list.push({keyword_name:that.arr[i]})
+//          }
         })
     },
     methods:{

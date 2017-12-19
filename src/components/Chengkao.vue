@@ -4,11 +4,6 @@
 <template>
   <div class="chengkao">
     <search></search>
-    <enrol
-    :propp="propp"></enrol>
-    <bar></bar>
-    <footbar :titles="titles"></footbar>
-    <bar></bar>
     <div class="myself">
       <div class="myself-bar">
         <span class="span1">成考</span>
@@ -18,13 +13,12 @@
       :xinde="xinde"></zhuanti>
     </div>
     <bar></bar>
-    <footbar :titles="titles"></footbar>
+    <footbar :titles="titles" :speciallist="speciallist" :categoryid="categoryid"></footbar>
     <logo></logo>
   </div>
 </template>
 <script>
   import search from "./common/Search.vue";
-  import enrol from "./common/enrol.vue";
   import bar from "./common/bar.vue";
   import footbar from "./common/footbar.vue";
   import myself from "./seconedrouter/myself.vue";
@@ -33,20 +27,24 @@
   export default {
     name: 'chengkao',
     components:{
-      search,enrol,bar,footbar,myself,logo,zhuanti
+      search,bar,footbar,myself,logo,zhuanti
     },
     data () {
       return {
-        propp:[
-          {text:"主要专业"},
-          {
-            list:[]
-          }
-        ],
         xinde:[],
         titles:[
           {
             titles:'成考文章'
+          }
+        ],
+        speciallist:[
+          {
+            speciallist:{}
+          }
+        ],
+        categoryid:[
+          {
+            categoryid:'8'
           }
         ]
       }
@@ -67,6 +65,12 @@
       this.$http.get('/api/default/hot-article.html',{params: {category_id: 8}})
         .then((response) => {
           that.xinde=response.data.data;
+        });
+      /*
+     * 成考热门专题*/
+      this.$http.get('/api/default/hot-special.html',{params: {category_id: 8}})
+        .then((response) => {
+          that.speciallist=response.data.data;
         })
     },
     methods:{

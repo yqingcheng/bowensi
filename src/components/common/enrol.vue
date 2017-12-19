@@ -4,9 +4,9 @@
 <template>
   <div class="enrol">
     <div class="enroi">
-      <p>{{propp[0].text}}</p>
+      <p>报考指南</p>
       <ul class="enroi-guide" >
-        <li v-for="(item,index) in propp[1].list":key="item.id" @click="getid(index)">
+        <li v-for="(item,index) in list":key="item.id" @click="getid(index)">
           {{item.keyword_name}}
         </li>
       </ul>
@@ -16,26 +16,32 @@
 <script>
   export default {
     name: 'enrol',
-    props: {
-      propp: {
-        type: Array,
-        required: true
-      }
-    },
     components:{
 
     },
     data () {
       return {
-
+        list:[]
       }
+    },
+    created(){
+      let that=this;
+      /*
+      *报考指南
+      *该关键字可点击可跳转  跳转页面是文章列表
+      * keyword_name	关键字
+      * */
+      this.$http.get('/api/default/guide.html')
+      .then((response) => {
+        that.list=response.data.data
+      });
     },
     methods:{
       getid(index){
         this.$router.push({
-          path:'/worklist',
+          path:'./worklist',
           query:{
-            titles:"热门文章"
+            inputval:this.list[index].keyword_name
           }
         })
       }

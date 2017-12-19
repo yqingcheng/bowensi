@@ -17,8 +17,7 @@
       </li>
     </ul>
     <bar></bar>
-    <enrol
-        :propp="propp"></enrol>
+    <enrol></enrol>
     <bar></bar>
     <div class="academy">
       <div class="academy-bar">
@@ -84,10 +83,10 @@
     <bar></bar>
     <div class="footbar">
       <div class="footbar-img">
-        <p><b>依托互联网数据资源和自然语言处理技术优势</b></p>
-        <img src="../../static/images/logoimg.jpg" alt="" @click="skipWorkList">
+        <p><b>{{speciallist.name}}</b></p>
+        <img :src="imgsrc + speciallist.image" alt="" @click="skipWorkList">
         <span class="mores">
-          <span>2017/05/03</span>
+          <span>{{new Date(parseInt(speciallist.create_time) * 1000).toLocaleDateString()}}</span>
           <span @click="moress">更多&nbsp;&nbsp;&nbsp;>>></span>
         </span>
         <div class="bar-v"></div>
@@ -129,20 +128,13 @@
 //            console.log(swiper)
           }
         },
-        propp:[
-          {
-            text:"报考指南"
-          },
-          {
-            list:[]
-          }
-        ],
         schoolfirst:[],
         schooltwo:[],
         schoolthree:[],
         first:[],
         other:[],
-        list:[]
+        list:[],
+        speciallist:{}
       }
     },
     created(){
@@ -160,15 +152,6 @@
           that.first=response.data.data.first;
           that.other=response.data.data.other;
 
-        });
-      /*
-      *报考指南
-      *该关键字可点击可跳转  跳转页面是文章列表
-      * keyword_name	关键字
-      * */
-      this.$http.get('/api/default/guide.html')
-        .then((response) => {
-          that.propp[1].list=response.data.data;
         });
       /*
       * 文章分类
@@ -197,6 +180,12 @@
           that.schooltwo=response.data.data.hot.slice(8,16);
           that.schoolthree=response.data.data.hot.slice(16,23);
         });
+      /*
+      * 首页热门专题*/
+      this.$http.get('/api/home/hot-special.html')
+        .then((response) => {
+         that.speciallist=response.data.data;
+        })
     },
     methods:{
       menu() {
@@ -244,7 +233,7 @@
         this.$router.push({
           path:'/worklist',
           query:{
-            titles:"热门文章"
+            categoryid:''
           }
         })
       },

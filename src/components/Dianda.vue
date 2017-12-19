@@ -13,7 +13,7 @@
       :xinde="xinde"></zhuanti>
     </div>
     <bar></bar>
-    <footbar :titles="titles"></footbar>
+    <footbar :titles="titles" :speciallist="speciallist" :categoryid="categoryid"></footbar>
     <logo></logo>
   </div>
 </template>
@@ -35,6 +35,16 @@
         titles:[
           {
             titles:'电大文章'
+          }
+        ],
+        speciallist:[
+          {
+            speciallist:{}
+          }
+        ],
+        categoryid:[
+          {
+            categoryid:'6'
           }
         ]
       }
@@ -59,6 +69,12 @@
         .catch(function (error) {
           console.log(error);
         });
+      /*
+      * 电大热门专题*/
+      this.$http.get('/api/default/hot-special.html',{params: {category_id: 6}})
+        .then((response) => {
+          that.speciallist=response.data.data;
+        })
     },
     methods:{
       menu() {

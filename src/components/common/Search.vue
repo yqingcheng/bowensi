@@ -23,7 +23,13 @@
     methods:{
       //获取search搜索框中的value值
       inputval:function () {
-        console.log(this.val)
+//        console.log(this.val)
+        this.$router.push({
+          path:'../worklist',
+          query:{
+            inputval:this.val
+          }
+        })
       }
     }
   }
