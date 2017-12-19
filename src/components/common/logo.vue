@@ -2,7 +2,9 @@
 <!-----------------------底部logo图------------------------>
 
 <template>
-    <div class="logo"></div>
+    <div class="logo">
+      <img :src="imgsrc+'/image/logo_2.png'" alt="" >
+    </div>
 </template>
 <script>
   export default {
@@ -12,7 +14,7 @@
     },
     data () {
       return {
-
+        imgsrc:domain.testUrl,
       }
     }
   }
@@ -21,9 +23,11 @@
   .logo{
     width: 100%;
     height: 4.5rem;
-    background-image: url("../../../static/images/logo.jpg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: percentage(50%,50%);
+    padding: 1rem 0.8rem ;
+    box-sizing: border-box;
+  }
+  .logo img{
+    width: 100%;
+    height: 100%;
   }
 </style>
