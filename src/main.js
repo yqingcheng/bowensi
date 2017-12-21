@@ -8,9 +8,8 @@ import VueAwesomeSwiper from "vue-awesome-swiper"
 import iView from 'iview'; // 导入组件库
 import 'iview/dist/styles/iview.css'; // 导入样式
 import axios from 'axios';
-import domain from './domain.js';
 import qs from 'qs';
-
+import domain from './domain.js';
 global.domain = domain;
 
 Vue.prototype.$http = axios;

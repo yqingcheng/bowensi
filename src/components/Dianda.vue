@@ -82,7 +82,13 @@
       },
       /*跳转到专题列表*/
       moress(){
-        this.$router.push('/special')
+        this.$router.push({
+          path:'/special',
+          query:{
+            titles:'电大文章',
+            categoryid:6
+          }
+        })
       }
     }
   }

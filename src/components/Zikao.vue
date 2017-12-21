@@ -89,12 +89,12 @@
       this.$http.get('/api/default/hot-special.html',{params: {category_id: 5}})
         .then((response) => {
           that.speciallist=response.data.data;
-          that.name1=response.data.data[0].name
-          that.name2=response.data.data[1].name
-          that.img1=response.data.data[0].image
-          that.img2=response.data.data[1].image
-          that.time1=response.data.data[0].create_time
-          that.time2=response.data.data[1].create_time
+          that.name1=response.data.data[0].name;
+          that.name2=response.data.data[1].name;
+          that.img1=response.data.data[0].image;
+          that.img2=response.data.data[1].image;
+          that.time1=response.data.data[0].create_time;
+          that.time2=response.data.data[1].create_time;
         });
     },
     methods:{
@@ -103,7 +103,13 @@
       },
       /*跳转到专题列表*/
       moress(){
-        this.$router.push('/special')
+        this.$router.push({
+          path:'/special',
+          query:{
+            titles:'自考文章',
+            categoryid:5
+          }
+        })
       },
       skipto(){
         this.$router.push({

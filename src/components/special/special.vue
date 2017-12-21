@@ -5,7 +5,7 @@
   <div class="special">
      <headerbar></headerbar>
     <search></search>
-    <footbar :titles="titles"></footbar>
+    <footbar :titles="titles" :speciallist="speciallist" :categoryid="categoryid"></footbar>
     <bar></bar>
     <div class="myself-bar">
       <span class="span1">最新专题</span>
@@ -38,14 +38,32 @@
       return {
         imgsrc:domain.testUrl,
         titles:[
-          {titles:'热门文章'}
-          ],
+          {
+            titles:this.$route.query.titles
+          }
+        ],
+        speciallist:[
+          {
+            speciallist:{}
+          }
+        ],
+        categoryid:[
+          {
+            categoryid:this.$route.query.categoryid
+          }
+        ],
         list:[]
       }
     },
     created(){
       this.menu();
       let that=this;
+      /*
+      * 网教热门专题*/
+      this.$http.get('/api/default/hot-special.html',{params: {category_id: this.categoryid[0].categoryid}})
+        .then((response) => {
+          that.speciallist=response.data.data;
+        });
       /*
       *专题列表
       *此接口可用于首页、自考、网教、电大、成考页面 会根据不同的分类ID 返回不同类型的热门文章
@@ -69,7 +87,7 @@
         this.$router.push({
           path:'/speciallist',
           query:{
-            id:this.list[index].id
+            qule:this.list[index]
           }
         })
       }
